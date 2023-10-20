@@ -23,20 +23,23 @@ $mainOffers = array($stranger1, $hp4, $marvel1, $disney14);
             <div id="demo" class="carousel slide bg-dark" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <?php foreach ($data as $key => $dt) : ?>
-                        <button type="button" data-bs-target="#demo" data-bs-slide-to="<?= $key ?>" class="<?= $key === 0 ? 'active' : '' ?>"></button>
+                        <button type="button" data-bs-target="#demo" data-bs-slide-to="<?= $key ?>" class="<?= $key === 'db1' ? 'active' : '' ?>"></button>
                     <?php endforeach; ?>
                 </div>
                 
                 <div class="carousel-inner">
-                    <?php foreach ($data as $key => $dt) : ?>
-                        <div class="carousel-item <?= $key === 0 ? 'active' : '' ?>">
-                            <a class="text-decoration-none" href="./products.php?category=<?= $dt[0]->getName() ?>">
+                    <?php 
+                        foreach ($data as $key => $dt) : 
+                            $category = reset($dt);
+                    ?>
+                        <div class="carousel-item <?= $key === 'db1' ? 'active' : '' ?>">
+                            <a class="text-decoration-none" href="./products.php?category=<?= $category->getName() ?>">
                                 <div class="carousel-content text-light my-5 my-md-0 d-flex flex-column flex-md-row align-items-center justify-content-center">
                                     <div class="d-flex flex-column row-gap-2">
-                                        <h3 class="fs-1"><?= strtoupper($dt[0]->getName()) ?></h3>
-                                        <span><?= $dt[0]->getDesc() ?></span>
+                                        <h3 class="fs-1"><?= strtoupper($category->getName()) ?></h3>
+                                        <span><?= $category->getDesc() ?></span>
                                     </div>
-                                    <img src="./assets/img/<?= $dt[0]->getImg() ?>" alt="<?= $dt[0]->getName() ?>" class="d-block cursor-pointer opacity carousel-img">
+                                    <img src="./assets/img/<?= $category->getImg() ?>" alt="<?= $category->getName() ?>" class="d-block cursor-pointer opacity carousel-img">
                                 </div>
                             </a>
                         </div>
