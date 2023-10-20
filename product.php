@@ -9,8 +9,8 @@ $productPrice = '';
 $productCategory = '';
 $productMap = [];
 
-foreach ($dataBase as $data) {
-    foreach ($data[1] as $product) {
+foreach ($data as $dt) {
+    foreach ($dt[1] as $product) {
         $productMap[$product->getID()] = $product;
     }
 }
