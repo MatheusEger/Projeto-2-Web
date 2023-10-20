@@ -17,7 +17,8 @@ echo "<nav class='navbar navbar-expand-sm bg-dark p-md-5'>
                     <ul class='dropdown-menu' aria-labelledby='navbar-dropdown1'>";
 
 foreach($data as $dt) {
-    $categoryName = $dt[0]->getName();
+    $category = reset($dt);
+    $categoryName = $category->getName();
     echo "<li><a class='dropdown-item' href='./products.php?category=$categoryName'>$categoryName</a></li>";
 }
 
