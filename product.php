@@ -111,16 +111,16 @@ if (isset($productMap[$productUser])) {
         const btnIWant = $('#add-to-cart-btn')
         const alert = $('#alert')
         
-        btnIWant.addEventListener('click', (e) => {
+        btnIWant.on('click', (e) => {
             e.preventDefault()
             const quantitySelect = $('#quantity')
-            const selectedQuantity = quantitySelect.options[quantitySelect.selectedIndex].value
-            alert.classList.add("alert-warning")
-            alert.innerHTML = "<p>O item foi adicionado ao carrinho</p>"
+            const selectedQuantity = quantitySelect.val()
+            alert.addClass('alert-warning')
+            alert.html('<p>O item foi adicionado ao carrinho</p>')
 
-            setInterval(() => {
-                let url = btnIWant.href
-                url += "&quantity=" + selectedQuantity
+            setTimeout(() => {
+                let url = btnIWant.attr('href')
+                url += '&quantity=' + selectedQuantity
                 window.location.href = url
             }, 1000)
         })
