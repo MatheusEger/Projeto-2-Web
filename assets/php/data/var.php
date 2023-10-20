@@ -25,4 +25,8 @@ if (isset($dataBase)) {
 if (!isset($_SESSION['users'])) { 
     $_SESSION['users'] = array();
 }
+
+if (!isset($_SESSION['cartProducts'])) {
+    $_SESSION['cartProducts'] = array();
+}
 ?>
