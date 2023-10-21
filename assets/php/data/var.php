@@ -33,4 +33,11 @@ if (!isset($_SESSION['qntProductsTotal'])) {
 if(!isset($_SESSION['totalPriceCart'])) { 
     $_SESSION['totalPriceCart'] = 0;        
 }
+
+if (!isset($_SESSION['userOrders'])) {
+    $_SESSION['userOrders'] = array();
+}
+
+$interestOn5Installments = 5;
+$interestOn6Installments = 15;
 ?>
