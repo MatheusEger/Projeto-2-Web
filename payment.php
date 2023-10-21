@@ -51,7 +51,7 @@ $sixInstallmentsFormatted = 'R$' . number_format($sixInstallments, 2, ',','.');
                     <input type="text" name="city" id="city" class="form-control" placeholder="cidade">
                 </div>
             </div>
-            <div class="form-section" id="payment-form-wrapper" style="pointer-events: none; opacity: .5;">
+            <div class="form-section" id="payment-form-wrapper" style="display: none;">
                 <h3>FORMA DE PAGAMENTO</h3>
                 <div class="payment-form" id="payment-form">
                     <select class="form-select" name="payment-form-select" id="payment-form-select">
@@ -272,7 +272,7 @@ $sixInstallmentsFormatted = 'R$' . number_format($sixInstallments, 2, ',','.');
                 $('#card-number').mask('0000 0000 0000 0000')
                 $('#security-code').mask('000')
 
-                fieldsWatch(address, showFormSection, paymentFormWrapper, hideFormSection, paymentFormWrapper)
+                fieldsWatch(address, display, paymentFormWrapper, displayNone, paymentFormWrapper)
 
                 paymentFormSelect.on('change', () => {
                     display(paymentFormInfoWrapper)
@@ -318,20 +318,6 @@ $sixInstallmentsFormatted = 'R$' . number_format($sixInstallments, 2, ',','.');
                     }
                 })
             }) 
-            
-            const showFormSection = (element) => {
-                element.css({
-                    'pointer-events': 'auto',
-                    'opacity': '1'
-                })
-            }
-
-            const hideFormSection = (element) => {
-                element.css({
-                    'pointer-events': 'none',
-                    'opacity': '0.5'
-                })
-            }
 
             const display = (element) => {
                 element.css('display', 'block')
