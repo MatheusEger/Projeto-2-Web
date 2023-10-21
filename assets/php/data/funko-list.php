@@ -593,11 +593,11 @@ $dc = array($dc1, $dc2, $dc3, $dc4, $dc5, $dc6, $dc7, $dc8, $dc9, $dc10);
 $disney = array($disney1, $disney2, $disney3, $disney4, $disney5, $disney6, $disney7, $disney8, $disney9, $disney10, $disney11, $disney12, $disney13, $disney14, $disney15, $disney16, $disney17, $disney18, $disney19, $disney20, $disney21, $disney22);
 
 $dataBase = array(
-    'db1' => array($category1, $strangerThings),
-    'db2' => array($category2, $harryPotter),
-    'db3' => array($category3, $marvel),
-    'db4' => array($category4, $dc),
-    'db5' => array($category5, $disney)
+    array($category1, $strangerThings),
+    array($category2, $harryPotter),
+    array($category3, $marvel),
+    array($category4, $dc),
+    array($category5, $disney)
 );
 
 ?>
