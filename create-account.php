@@ -5,6 +5,7 @@ $returnMessage = '';
 $users = $_SESSION['users'];
 $user = null;
 $successedRegistration = false;
+$userAlreadyExist = false;
 
 function createUser($userName, $email, $password, $password2) {
     global $successedRegistration;
@@ -25,27 +26,26 @@ function createUser($userName, $email, $password, $password2) {
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $userName = $_POST["userName"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $password2 = $_POST["password2"];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $userName = $_POST['userName'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password2 = $_POST['password2'];
 
     if (empty($userName) || empty($email) || empty($password) || empty($password2)) { 
         $returnMessage = 'Preencha os campos obrigatórios';
     } else {
-        if (empty($users)) {
-            $returnMessage = createUser($userName, $email, $password, $password2);
-        } else {
-            foreach ($users as $user) {
-                if ($user->getEmail() == $email) {
-                    $returnMessage = 'Esse usuário já existe, por favor tente um e-mail diferente';
-                    break;
-                } else {
-                    $returnMessage = createUser($userName, $email, $password, $password2);
-                }      
-            }
+        foreach ($users as $user) {
+            if ($user->getEmail() == $email) {
+                $returnMessage = 'Esse usuário já existe, por favor tente um e-mail diferente';
+                $userAlreadyExist = true;
+                break;
+            }    
         }
+    }
+
+    if (!$userAlreadyExist) {
+        $returnMessage = createUser($userName, $email, $password, $password2);
     }
 }
 ?>
