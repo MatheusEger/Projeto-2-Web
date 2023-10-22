@@ -1,11 +1,11 @@
 <?php
 include_once('./assets/php/data/var.php');
 
-$userInSession = $_SESSION['userInSession']['email'];
 $orderCanceled = false;
 $returnMessage = '';
 
-if (isset($_GET['orderId']) && !empty($_SESSION['userOrders'][$userInSession])) {
+if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
+    $userInSession = $_SESSION['userInSession']['email'];
     $orderIdToRemove = $_GET['orderId'];
     $userOrders = $_SESSION['userOrders'][$userInSession];
 

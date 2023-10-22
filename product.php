@@ -1,7 +1,6 @@
 <?php
 include_once('./assets/php/data/var.php');
 
-$productUser = $_GET['product'];
 $productImg = '';
 $productName = '';
 $productDesc = '';
@@ -9,19 +8,23 @@ $productPrice = '';
 $productCategory = '';
 $productMap = [];
 
-foreach ($data as $dt) {
-    foreach ($dt[1] as $product) {
-        $productMap[$product->getID()] = $product;
-    }
-}
+if (isset($_GET['product'])) {
+    $productUser = $_GET['product'];
 
-if (isset($productMap[$productUser])) {
-    $product = $productMap[$productUser];
-    $productImg = $product->getImg();
-    $productName = $product->getName();
-    $productDesc = $product->getDesc();
-    $productPrice = $product->getPrice();
-    $productCategory = $product->getCategory();
+    foreach ($data as $dt) {
+        foreach ($dt[1] as $product) {
+            $productMap[$product->getID()] = $product;
+        }
+    }
+    
+    if (isset($productMap[$productUser])) {
+        $product = $productMap[$productUser];
+        $productImg = $product->getImg();
+        $productName = $product->getName();
+        $productDesc = $product->getDesc();
+        $productPrice = $product->getPrice();
+        $productCategory = $product->getCategory();
+    }
 }
 ?>
 
@@ -39,69 +42,73 @@ if (isset($productMap[$productUser])) {
 <body>
     <?php include_once('./assets/php/components/navbar.php') ?>
     <main class="p-5">
-        <section class="mt-5 mb-5">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-5 col-lg-5 col-12 col-sm-12">
-                        <div class="text-center w-20" id="clicked-product-img"><img src="<?= $productImg ?>" style="width: 400px;"></div>
-                    </div>
-                    <div class="col-md-7 col-lg-7 col-12 col-sm-12">
-                        <div class="row mb-5">
-                            <div class="col">
-                                <div class="row mt-4 mt-sm-4 mt-md-0 mt-lg-0">
-                                    <div class="col">
-                                        <div class="fs-2" id="clicked-product-title"><?= $productName ?></div>
+        <?php if (!(empty($productMap))) : ?>
+            <section class="mt-5 mb-5">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-5 col-lg-5 col-12 col-sm-12">
+                            <div class="text-center w-20" id="clicked-product-img"><img src="<?= $productImg ?>" style="width: 400px;"></div>
+                        </div>
+                        <div class="col-md-7 col-lg-7 col-12 col-sm-12">
+                            <div class="row mb-5">
+                                <div class="col">
+                                    <div class="row mt-4 mt-sm-4 mt-md-0 mt-lg-0">
+                                        <div class="col">
+                                            <div class="fs-2" id="clicked-product-title"><?= $productName ?></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <div id="clicked-product-description"><?= $productDesc ?></div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <div id="clicked-product-description"><?= $productDesc ?></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mt-3">
-                                    <div class="col">
-                                        <div id="clicked-product-price"><?= $productPrice ?></div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <div id="clicked-product-price"><?= $productPrice ?></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mt-2 row-cols-auto">
-                                    <div class="col">
-                                        <p class="fs-4">Quantidade:</p>
+                                    <div class="row mt-2 row-cols-auto">
+                                        <div class="col">
+                                            <p class="fs-4">Quantidade:</p>
+                                        </div>
+                                        <div class="col"> 
+                                            <div class="">
+                                                <select class="form-select" id="quantity">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col"> 
-                                        <div class="">
-                                            <select class="form-select" id="quantity">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                            </select>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="alert" id="alert"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="alert" id="alert"></div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
 
-                        <div class="row justify-content-center">
-                            <div class="col">
-                                <div class="text-center">
-                                    <a class="btn btn-dark page-font btn-lg p-2" type="button" href="./cart.php?product=<?= $productUser ?>" id="add-to-cart-btn">
-                                        <i class="bi bi-cart-fill text-white"></i>
-                                        Eu quero!
-                                    </a>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="text-center">
+                                        <a class="btn btn-dark page-font btn-lg p-2" type="button" href="./cart.php?product=<?= $productUser ?>" id="add-to-cart-btn">
+                                            <i class="bi bi-cart-fill text-white"></i>
+                                            Eu quero!
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        <?php else : ?>
+            <p class="bolder-font-700 m-5 text-center h3">Não foi possível encontrar o produto.</p>
+        <?php endif; ?>
     </main>
     <?php include_once('./assets/php/components/footer.php') ?>
     

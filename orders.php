@@ -1,10 +1,10 @@
 <?php
 include_once('./assets/php/data/var.php');
 
-$userInSession = $_SESSION['userInSession']['email'];
 $userOrders = array();
 
-if (isset($userOrders[$userInSession])) {
+if (isset($_SESSION['userInSession']['email'])) {
+    $userInSession = $_SESSION['userInSession']['email'];
     $userOrders = $_SESSION['userOrders'][$userInSession];
 }
 ?>

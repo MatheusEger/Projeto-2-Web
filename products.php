@@ -1,7 +1,11 @@
 <?php
 include_once('./assets/php/data/var.php');
 
-$categoryUser = $_GET['category'];
+$categoryUser = '';
+
+if (isset($_GET['category'])) {
+    $categoryUser = $_GET['category'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,33 +22,37 @@ $categoryUser = $_GET['category'];
 <body>
     <?php include_once('./assets/php/components/navbar.php') ?>
     <main class="p-5">
-        <h1 class="fs-1"><?= $categoryUser ?></h1>
-        <div class="products row g-3">
-            <?php foreach ($data as $dt) : 
-                $category = reset($dt);
-                $products = $dt[1];
+        <?php if (!(empty($categoryUser))) : ?>
+            <h1 class="fs-1"><?= $categoryUser ?></h1>
+            <div class="products row g-3">
+                <?php foreach ($data as $dt) : 
+                    $category = reset($dt);
+                    $products = $dt[1];
 
-                if ($category->getName() == $categoryUser) : 
-                    foreach ($products as $product) :
-            ?>
-                <div class="col-md-3">
-                    <a class="text-decoration-none" href="./product.php?product=<?= $product->getID() ?>">
-                        <div class="card bg-black text-light text-center cursor-pointer">
-                            <div><img class="card-img-top text-center" src="<?= $product->getImg() ?>" alt="<?= $product->getName() ?>"></div>
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $product->getName() ?></h5>
-                                <p class="card-text"><?= $product->getPrice() ?></p>
-                                <button class="btn btn-main-offer">Adicionar ao Carrinho</button>
+                    if ($category->getName() == $categoryUser) : 
+                        foreach ($products as $product) :
+                ?>
+                    <div class="col-md-3">
+                        <a class="text-decoration-none" href="./product.php?product=<?= $product->getID() ?>">
+                            <div class="card bg-black text-light text-center cursor-pointer">
+                                <div><img class="card-img-top text-center" src="<?= $product->getImg() ?>" alt="<?= $product->getName() ?>"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $product->getName() ?></h5>
+                                    <p class="card-text"><?= $product->getPrice() ?></p>
+                                    <button class="btn btn-main-offer">Adicionar ao Carrinho</button>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-            <?php 
-                endforeach; 
-                endif;
-                endforeach; 
-            ?>
-        </div>
+                        </a>
+                    </div>
+                <?php 
+                    endforeach; 
+                    endif;
+                    endforeach; 
+                ?>
+            </div>
+        <?php else : ?>
+            <p class="bolder-font-700 m-5 text-center h3">Não há produtos disponíveis aqui.</p>
+        <?php endif; ?>
     </main>
     <?php include_once('./assets/php/components/footer.php') ?>
 

@@ -1,12 +1,15 @@
 <?php
 include_once('./assets/php/data/var.php');
 
-$orderId = $_GET['orderId'];
-$userInSession = $_SESSION['userInSession']['email'];
 $userOrders = array();
 
-if (!(empty($_SESSION['userOrders'])) && !(empty($userInSession))) {
-    $userOrders = $_SESSION['userOrders'][$userInSession];
+if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
+    $orderId = $_GET['orderId'];
+    $userInSession = $_SESSION['userInSession']['email'];
+
+    if (!(empty($_SESSION['userOrders']))) {
+        $userOrders = $_SESSION['userOrders'][$userInSession];
+    }
 }
 ?>
 
@@ -24,7 +27,7 @@ if (!(empty($_SESSION['userOrders'])) && !(empty($userInSession))) {
 <body>
     <?php include_once('./assets/php/components/navbar.php') ?>
     <main class="p-5">
-    <?php if (!(empty($userOrders)) && !(empty($userInSession))) : ?>
+    <?php if (!(empty($userOrders))) : ?>
         <section>
             <div class="container my-2 m-lg-5">
                 <div class="row">

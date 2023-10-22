@@ -1,73 +1,80 @@
 <?php
 include_once('./assets/php/data/var.php');
 
-$userInSession = $_SESSION['userInSession']['email'];
+$userInSession = '';
+
+if (isset($_SESSION['userInSession']['email'])) {
+    $userInSession = $_SESSION['userInSession']['email'];
+}
+
 $cartProducts = $_SESSION['cartProducts'];
 $userOrders = $_SESSION['userOrders'];
 
-$userStreet = $_POST['street'];
-$userStreetNumber = $_POST['street-number'];
-$userDistrict = $_POST['district'];
-$userZipCode = $_POST['zip-code'];
-$userState = $_POST['state'];
-$userCity = $_POST['city'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $userStreet = $_POST['street'];
+    $userStreetNumber = $_POST['street-number'];
+    $userDistrict = $_POST['district'];
+    $userZipCode = $_POST['zip-code'];
+    $userState = $_POST['state'];
+    $userCity = $_POST['city'];
 
-$userPaymentMethod = $_POST['payment-form-select'];
+    $userPaymentMethod = $_POST['payment-form-select'];
 
-$userCardBrand = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['card-brand'] : '';
-$userCardholderName = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['cardholder-name'] : '';
-$userCardNumber = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['card-number'] : '';
-$userSecurityCode = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['security-code'] : '';
-$userExpirationDate = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['expiration-date'] : '';
-$userInstallments = ($userPaymentMethod === 'credit') ? $_POST['installments'] : '';
+    $userCardBrand = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['card-brand'] : '';
+    $userCardholderName = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['cardholder-name'] : '';
+    $userCardNumber = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['card-number'] : '';
+    $userSecurityCode = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['security-code'] : '';
+    $userExpirationDate = ($userPaymentMethod === 'credit' || $userPaymentMethod === 'debit') ? $_POST['expiration-date'] : '';
+    $userInstallments = ($userPaymentMethod === 'credit') ? $_POST['installments'] : '';
 
-if ($userPaymentMethod == 'credit') {
-    $userPaymentMethod = 'Cartão de Crédito';
-} else if ($userPaymentMethod == 'debit') {
-    $userPaymentMethod = 'Cartão de Débito';
-} else {
-    $userPaymentMethod = 'Pix';
+    if ($userPaymentMethod == 'credit') {
+        $userPaymentMethod = 'Cartão de Crédito';
+    } else if ($userPaymentMethod == 'debit') {
+        $userPaymentMethod = 'Cartão de Débito';
+    } else {
+        $userPaymentMethod = 'Pix';
+    }
+
+    $totalPriceCart = number_format($_SESSION['totalPriceCart'], 2, ',','.');
+
+    if (strpos($userInstallments, '5X') !== false ) {
+        $totalPriceCart = number_format(((($_SESSION['totalPriceCart']/5) + $interestOn5Installments) * 5), 2, ',','.');
+    } else if (strpos($userInstallments, '6X') !== false ) {
+        $totalPriceCart = number_format(((($_SESSION['totalPriceCart']/6) + $interestOn6Installments) * 6), 2, ',','.');
+    }
+
+    $userAddress = array(
+        'street' => $userStreet, 
+        'streetNumber' => $userStreetNumber, 
+        'district' => $userDistrict, 
+        'zipCode' => $userZipCode, 
+        'state' => $userState, 
+        'city' => $userCity
+    );
+
+    $userPaymentInfo = array(
+        'paymentMethod' => $userPaymentMethod, 
+        'cardBrand' => $userCardBrand, 
+        'cardholderName' => $userCardholderName, 
+        'cardNumber' => $userCardNumber, 
+        'securityCode' => $userSecurityCode, 
+        'expirationDate' => $userExpirationDate, 
+        'installments' => $userInstallments, 
+        'subtotal' => $_SESSION['totalPriceCart'], 
+        'total' => $totalPriceCart
+    );
+
+    $order = array(
+        'address' => $userAddress, 
+        'paymentInfo' => $userPaymentInfo, 
+        'cartProducts' => $cartProducts
+    );
+    $userOrders[$userInSession][] = $order;
+    $_SESSION['userOrders'] = $userOrders;  
+
+    unset($_SESSION['cartProducts']);
+    $_SESSION['qntProductsTotal'] = 0;
 }
-
-$totalPriceCart = number_format($_SESSION['totalPriceCart'], 2, ',','.');
-
-if (strpos($userInstallments, '5X') !== false ) {
-    $totalPriceCart = number_format(((($_SESSION['totalPriceCart']/5) + $interestOn5Installments) * 5), 2, ',','.');
-} else if (strpos($userInstallments, '6X') !== false ) {
-    $totalPriceCart = number_format(((($_SESSION['totalPriceCart']/6) + $interestOn6Installments) * 6), 2, ',','.');
-}
-
-$userAddress = array(
-    'street' => $userStreet, 
-    'streetNumber' => $userStreetNumber, 
-    'district' => $userDistrict, 
-    'zipCode' => $userZipCode, 
-    'state' => $userState, 
-    'city' => $userCity
-);
-
-$userPaymentInfo = array(
-    'paymentMethod' => $userPaymentMethod, 
-    'cardBrand' => $userCardBrand, 
-    'cardholderName' => $userCardholderName, 
-    'cardNumber' => $userCardNumber, 
-    'securityCode' => $userSecurityCode, 
-    'expirationDate' => $userExpirationDate, 
-    'installments' => $userInstallments, 
-    'subtotal' => $_SESSION['totalPriceCart'], 
-    'total' => $totalPriceCart
-);
-
-$order = array(
-    'address' => $userAddress, 
-    'paymentInfo' => $userPaymentInfo, 
-    'cartProducts' => $cartProducts
-);
-$userOrders[$userInSession][] = $order;
-$_SESSION['userOrders'] = $userOrders;  
-
-unset($_SESSION['cartProducts']);
-$_SESSION['qntProductsTotal'] = 0;
 ?>
 
 <!DOCTYPE html>
