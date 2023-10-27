@@ -5,7 +5,10 @@ $userOrders = array();
 
 if (isset($_SESSION['userInSession']['email'])) {
     $userInSession = $_SESSION['userInSession']['email'];
-    $userOrders = $_SESSION['userOrders'][$userInSession];
+    
+    if (!(empty($_SESSION['userOrders']))) {
+        $userOrders = $_SESSION['userOrders'][$userInSession];
+    }
 }
 ?>
 
