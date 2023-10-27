@@ -24,146 +24,134 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>FunkoMania</title>
 </head>
 <body>
-    <div>
-        <?php include_once('./assets/php/components/navbar.php') ?>
+    <?php include_once('./assets/php/components/navbar.php') ?>
 
-        <header>
-            <div id="demo" class="carousel slide bg-dark" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <?php foreach ($data as $key => $dt) : ?>
-                        <button type="button" data-bs-target="#demo" data-bs-slide-to="<?= $key ?>" class="<?= $key === 0 ? 'active' : '' ?>"></button>
-                    <?php endforeach; ?>
-                </div>
-                
-                <div class="carousel-inner">
-                    <?php foreach ($data as $key => $dt) : 
-                            $category = reset($dt);
-                    ?>
-                        <div class="carousel-item <?= $key === 0 ? 'active' : '' ?>">
-                            <a class="text-decoration-none" href="./products.php?category=<?= $category->getName() ?>">
-                                <div class="carousel-content text-light my-5 my-md-0 d-flex flex-column flex-md-row align-items-center justify-content-center">
-                                    <div class="d-flex flex-column row-gap-2">
-                                        <h3 class="fs-1"><?= strtoupper($category->getName()) ?></h3>
-                                        <span><?= $category->getDesc() ?></span>
-                                    </div>
-                                    <img src="./assets/img/<?= $category->getImg() ?>" alt="<?= $category->getName() ?>" class="d-block cursor-pointer opacity carousel-img">
-                                </div>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </button>
-                
-                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </button>
+    <header>
+        <div id="demo" class="carousel slide bg-dark" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <?php foreach ($data as $key => $dt) : ?>
+                    <button type="button" data-bs-target="#demo" data-bs-slide-to="<?= $key ?>" class="<?= $key === 0 ? 'active' : '' ?>"></button>
+                <?php endforeach; ?>
             </div>
-        </header>
-        <main>
-            <section class="about-us bg-black text-light w-100 d-flex align-items-center">
-                <div class="img-wrapper me-2">
-                    <span class="bg-warning d-inline-block cursor-pointer">
-                        <img src="./assets/img/eleven-st.png" alt="Eleven Stranger Things">
-                    </span>
-                </div>
-                <div class="ms-5">
-                    <h3 class="fs-1 mb-5">FunkoStore</h3>
-                    <div>
-                        <p>
-                            Bem-vindo à FunkoMania, sua loja de destino para os amantes de Funko Pop! Somos uma comunidade de colecionadores apaixonados que oferece uma ampla seleção de Funkos de todas as suas franquias favoritas.
-                        </p>
-                        <p>
-                            Nossa equipe é formada por conhecedores ávidos prontos para ajudá-lo a encontrar as peças perfeitas para sua coleção ou o presente ideal para outros fãs fervorosos.
-                        </p>
-                        <p>
-                            Além dos Funko Pops, oferecemos uma variedade de mercadorias colecionáveis relacionadas, como camisetas e canecas, para você exibir seu amor por seus personagens favoritos.
-                        </p>
-                        <p>
-                            Na FunkoMania, acreditamos em compartilhar histórias, paixões e memórias com nossos clientes. Este é um lugar onde os amantes de Funko se reúnem para compartilhar dicas, descobrir lançamentos emocionantes e celebrar juntos essa forma de arte colecionável.
-                        </p>
-                        <p>
-                            Obrigado por ser parte da comunidade FunkoMania. Estamos empolgados em fazer parte de sua jornada de colecionador e ansiosos para ajudá-lo a encontrar os Funkos dos seus sonhos.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <section class="main-offers bg-dark p-5">
-                <h3 class="main-offers-title text-white mb-5">Principais Ofertas</h3>
-                <div class="row main-offers-wrapper g-3">
-                    <?php foreach ($mainOffers as $offer) : ?>
-                        <div class="col-md-3">
-                            <a class="text-decoration-none" href="./product.php?product=<?= $offer->getID() ?>">
-                                <div class="card bg-black text-light text-center cursor-pointer">
-                                    <div><img class="card-img-top text-center" src="<?= $offer->getImg() ?>" alt="<?= $offer->getName() ?>"></div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $offer->getName() ?></h5>
-                                        <p class="card-text"><?= $offer->getPrice() ?></p>
-                                        <button class="btn btn-main-offer text-decoration-none">Adicionar ao Carrinho</button>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </section>
-            <section class="subscribe bg-warning w-100 d-flex align-items-center justify-content-center" id="subscribe-section">
-                <div class="ms-1">
-                    <div>
-                        <div class="mb-5">
-                            <h3 class="fs-1">Inscreva-se</h3>
-                            <span>Se inscreva para ser notificado</span>
-                        </div>
-                        <form class="d-flex flex-column row-gap-2" method="post" id="form-subscribe">
-                            <div>
-                                <label for="subscribe" class="form-label">E-mail</label>
-                                <input type="text" class="form-control" name="subscribe" id="subscribe" maxlength="20">
-                                <div id="valid-feedback"></div>
-                                <div id="invalid-feedback"></div>
-                            </div>
-                            <button type="submit" class="btn btn-dark rounded-pill" id="submit-button">Inscrever-me</button>
-                        </form>
-                    </div>
-                </div>
-                <div id="imageCarousel" class="carousel slide ms-5" style="width: 410px; height: 410px; overflow: hidden;" data-bs-ride="carousel" data-interval="false">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="img-wrapper me-2">
-                                <span class="bg-dark d-inline-block cursor-pointer">
-                                    <img class="m-0" src="./assets/img/harley-dc.png" alt="Eleven Stranger Things">
-                                </span>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="img-wrapper me-2">
-                                <span class="bg-dark d-inline-block cursor-pointer">
-                                    <img class="m-0" src="./assets/img/harry-hp.png" alt="Descrição da segunda imagem">
-                                </span>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="img-wrapper me-2">
-                                <span class="bg-dark d-inline-block cursor-pointer">
-                                    <img class="m-0" src="./assets/img/jack-disney.png" alt="Descrição da terceira imagem">
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </a>
-                </div>
-            </section>
-        </main>
 
-        <?php include_once('./assets/php/components/footer.php') ?>
-    </div>
+            <div class="carousel-inner">
+                <?php foreach ($data as $key => $dt) :
+                    $category = reset($dt);
+                ?>
+                    <div class="carousel-item <?= $key === 0 ? 'active' : '' ?>">
+                        <a class="text-decoration-none" href="./products.php?category=<?= $category->getName() ?>">
+                            <div class="carousel-content text-light my-5 my-md-0 d-flex flex-column flex-md-row align-items-center justify-content-center">
+                                <div class="d-flex flex-column row-gap-2">
+                                    <h3 class="fs-1"><?= strtoupper($category->getName()) ?></h3>
+                                    <span><?= $category->getDesc() ?></span>
+                                </div>
+                                <img src="./assets/img/<?= $category->getImg() ?>" alt="<?= $category->getName() ?>" class="d-block cursor-pointer opacity carousel-img">
+                            </div>
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </header>
+    <main>
+        <section class="about-us bg-black text-light w-100 d-flex align-items-center">
+            <div class="img-wrapper me-2 d-none d-md-block">
+                <span class="bg-warning d-inline-block cursor-pointer">
+                    <img src="./assets/img/eleven-st.png" alt="Eleven Stranger Things">
+                </span>
+            </div>
+            <div class="ms-2 ms-md-5 mr-2 p-2">
+                <h3 class="fs-1 mb-3 mb-md-5">FunkoStore</h3>
+                <div class="stretch-content">
+                    <p class="mb-3">Bem-vindo à FunkoMania, sua loja de destino para os amantes de Funko Pop! Somos uma comunidade de colecionadores apaixonados que oferece uma ampla seleção de Funkos de todas as suas franquias favoritas.</p>
+                    <p class="mb-3">Nossa equipe é formada por conhecedores ávidos prontos para ajudá-lo a encontrar as peças perfeitas para sua coleção ou o presente ideal para outros fãs fervorosos.</p>
+                    <p class="mb-3">Além dos Funko Pops, oferecemos uma variedade de mercadorias colecionáveis relacionadas, como camisetas e canecas, para você exibir seu amor por seus personagens favoritos.</p>
+                    <p class="mb-3">Na FunkoMania, acreditamos em compartilhar histórias, paixões e memórias com nossos clientes. Este é um lugar onde os amantes de Funko se reúnem para compartilhar dicas, descobrir lançamentos emocionantes e celebrar juntos essa forma de arte colecionável.</p>
+                    <p class="mb-3">Obrigado por ser parte da comunidade FunkoMania. Estamos empolgados em fazer parte de sua jornada de colecionador e ansiosos para ajudá-lo a encontrar os Funkos dos seus sonhos.</p>
+                </div>
+            </div>
+        </section>
+        <section class="main-offers bg-dark p-5">
+            <h3 class="main-offers-title text-white mb-5">Principais Ofertas</h3>
+            <div class="row main-offers-wrapper g-3">
+                <?php foreach ($mainOffers as $offer) : ?>
+                    <div class="col-md-3" style="position: relative;">
+                        <a class="text-decoration-none" href="./product.php?product=<?= $offer->getID() ?>">
+                            <div class="card bg-black text-light text-center cursor-pointer">
+                                <div><img class="card-img-top text-center" src="<?= $offer->getImg() ?>" alt="<?= $offer->getName() ?>"></div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $offer->getName() ?></h5>
+                                    <p class="card-text"><?= $offer->getPrice() ?></p>
+                                    <button class="btn btn-main-offer text-decoration-none">Adicionar ao Carrinho</button>
+                                </div>
+                            </div>
+                        </a>
+                        <img class="flag-offer" src="./assets/img/flag-offer.png" alt="Flag Oferta">
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+        <section class="subscribe bg-warning w-100 d-flex align-items-center justify-content-center">
+            <div class="ms-2 ms-md-5">
+                <div>
+                    <div class="mb-3 mb-md-5">
+                        <h3 class="fs-1">Inscreva-se</h3>
+                        <span>Se inscreva para ser notificado</span>
+                    </div>
+                    <form class="d-flex flex-column row-gap-2">
+                        <div>
+                            <label for="exampleFormControlInput1" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="exampleFormControlInput1">
+                        </div>
+                        <button class="btn btn-dark rounded-pill">Inscrever-me</button>
+                    </form>
+                </div>
+            </div>
+            <div id="imageCarousel" class="carousel slide ms-2 ms-md-5" data-bs-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="img-wrapper me-2">
+                            <span class="bg-dark d-inline-block cursor-pointer">
+                                <img class="m-0" src="./assets/img/harley-dc.png" alt="Eleven Stranger Things">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="img-wrapper me-2">
+                            <span class="bg-dark d-inline-block cursor-pointer">
+                                <img class="m-0" src="./assets/img/harry-hp.png" alt="Descrição da segunda imagem">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="img-wrapper me-2">
+                            <span class="bg-dark d-inline-block cursor-pointer">
+                                <img class="m-0" src="./assets/img/jack-disney.png" alt="Descrição da terceira imagem">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                    <span class="visually-hidden">Next</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <?php include_once('./assets/php/components/footer.php') ?>
 
     <div class="modal" tabindex="-1" id="modal">
         <div class="modal-dialog">
@@ -222,16 +210,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         })
     </script>
-    <?php if(!(empty($emailSubscribe))) : 
+    <?php if($emailSubscribe) : 
         sleep(1);
     ?>
         <script type="text/javascript">
-            const modal = $('#modal')
+            $(() => {
+                const modal = $('#modal')
+                modal.show()
+                $('#close-modal').on('click', () => {
+                    modal.hide()
+                })  
+            })
+        </script>
+    <?php endif; ?>
 
-            modal.show()
-
-            $('#close-modal').on('click', () => {
-                modal.hide()
+    <?php if($userInSession) : ?>
+        <script type="text/javascript">
+            $(() => {
+                $('#navbar-brand').addClass('mt-4')
+            })
+        </script>
+    <?php else : ?>
+        <script type="text/javascript">
+            $(() => {
+                $('#navbar-brand').removeClass('mt-4')
             })
         </script>
     <?php endif; ?>
