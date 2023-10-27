@@ -85,6 +85,12 @@ svg {
         width: 100%; 
         max-width: none; 
     }
+
+    .footer .logo{
+        
+        width: 100%; 
+        max-width: 100%; 
+    }
 }
 
 @keyframes deepIn {
