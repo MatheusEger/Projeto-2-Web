@@ -4,18 +4,22 @@ $userInSession = $_SESSION['userInSession'];
 
 echo "<nav class='navbar navbar-expand-sm bg-dark p-md-5'>
     <div class='container-fluid'>
-        <a class='navbar-brand text-light m-0 p-0 me-4' href='./index.php'>FunkoMania</a>
+        <a class='navbar-brand text-light m-0 p-0 me-4 mt-4' href='./index.php'>
+            <img class='logo' src='./assets/img/logo/logo.png'>
+        </a>
         <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#collapsed-navbar' aria-expanded='false' aria-controls='#collapsed-navbar'>
             <span class='navbar-toggler-icon'></span>
         </button>
-        <div class='collapse navbar-collapse' id='collapsed-navbar'>
-            <ul class='navbar-nav d-flex justify-content-between w-100'>
+        <div class='collapse navbar-collapse d-flex flex-column' id='collapsed-navbar'>
+            <span class='text-white align-self-end'>Bem-vinde $userName</span>
+            <ul class='navbar-nav d-flex justify-content-between align-items-center w-100'>
                 <li class='nav-item dropdown'>
                     <a class='nav-link dropdown-toggle text-light' href='#' role='button' id='navbar-dropdown1' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                         Produtos
                     </a>
                     <ul class='dropdown-menu' aria-labelledby='navbar-dropdown1'>";
 
+                    
 foreach($data as $dt) {
     $category = reset($dt);
     $categoryName = $category->getName();
@@ -24,7 +28,7 @@ foreach($data as $dt) {
 
 echo "</ul>
                 </li>
-                <li class='nav-item d-sm-flex column-gap-3'>
+                <li class='nav-item d-sm-flex column-gap-3 '>
                     <div class='dropdown'>
                         <a class='nav-link dropdown-toggle text-light' href='#' role='button' id='navbar-dropdown2' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
                             Minha Conta
@@ -33,7 +37,6 @@ echo "</ul>
 if ((!empty($userInSession))) {
     $userName = $userInSession['name'];
     echo "
-        <li><span class='p-3'>$userName</span></li>
         <li><a class='dropdown-item' href='././orders.php'>Meus pedidos</a></li>
         <li><a class='dropdown-item' href='././logout.php'>Sair</a></li>
     ";

@@ -1,11 +1,13 @@
 <?php
 
 echo "
-<footer class='p-5 bg-black'>
+<footer class='footer p-5 bg-black'>
     <div class='container m-md-5 m-lg-5'>
         <div class='row justify-content-md-between justify-content-lg-between pb-5'>
             <div class='col col-md-auto col-lg-auto mb-5'>
-                <a class='text-light m-0 p-0 me-4 text-decoration-none' href='./index.php'>FunkoMania</a>
+                <a class='text-light m-0 p-0 me-4 text-decoration-none' href='./index.php'>
+                <img class='logo' src='./assets/img/logo/logo.png'>
+                </a>
             </div>
 
             <div class='col col-md-auto col-lg-auto'>
@@ -66,3 +68,4 @@ echo "
 </footer>
 "
 ?>
+

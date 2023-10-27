@@ -7,7 +7,8 @@ $user = null;
 $successedRegistration = false;
 $userAlreadyExist = false;
 
-function createUser($userName, $email, $password, $password2) {
+function createUser($userName, $email, $password, $password2)
+{
     global $successedRegistration;
 
     if ($password == $password2) {
@@ -17,7 +18,7 @@ function createUser($userName, $email, $password, $password2) {
             $password
         );
 
-        $_SESSION['users'][] = $user;   
+        $_SESSION['users'][] = $user;
         $successedRegistration = true;
         return 'Usuário cadastrado com sucesso!';
     } else {
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
 
-    if (empty($userName) || empty($email) || empty($password) || empty($password2)) { 
+    if (empty($userName) || empty($email) || empty($password) || empty($password2)) {
         $returnMessage = 'Preencha os campos obrigatórios';
     } else {
         foreach ($users as $user) {
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $returnMessage = 'Esse usuário já existe, por favor tente um e-mail diferente';
                 $userAlreadyExist = true;
                 break;
-            }    
+            }
         }
     }
 
@@ -52,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,25 +61,51 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./assets/css/main.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+    </style>
     <title>FunkoMania</title>
 </head>
+
 <body>
-    <main class="p-5">
-        <form class="form" method="post" action="#">  
-            <div class="mb-5">
-                <input class="form-control" name="email" id="email" placeholder="digite seu endereço de e-mail">
-                <input class="form-control" name="userName" id="userName" placeholder="digite seu nome">
-                <input class="form-control" name="password" id="password" placeholder="crie sua senha aqui">
-                <input class="form-control" name="password2" id="password2" placeholder="confirme sua senha">
+    <main class="p-5 d-flex justify-content-center align-items-center min-vh-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto">
+                    <div class="card shadow p-4">
+                        <h3 class="mb-4">Cadastro</h3>
+                        <form class="form" method="post" action="#">
+                            <div class="mb-3">
+                                <input class="form-control" id="email" name="email" type="email" placeholder="Digite seu endereço de e-mail">
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" id="userName" name="userName" type="text" placeholder="Digite seu nome">
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" id="password" name="password" type="password" placeholder="Crie sua senha aqui">
+                            </div>
+                            <div class="mb-3">
+                                <input class="form-control" id="password2" name="password2" type="password" placeholder="Confirme sua senha">
+                            </div>
+                            <?php if (!empty($returnMessage)) : ?>
+                                <div class="alert alert-warning"><?= $returnMessage ?></div>
+                            <?php endif; ?>
+                            <div class="mb-3">
+                                <button class="btn btn-dark w-100" type="submit">Cadastrar</button>
+                            </div>
+                        </form>
+                        <div class="mb-3 text-center">
+                            <p>Já tem uma conta? <a class="login-link" href="./login.php">Faça login aqui</a></p>
+                        </div>
+                        <div>
+                            <a class="btn btn-dark" href=".">Voltar para página inicial</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <?php if (!empty($returnMessage)) : ?>
-                <span class="alert" id="alert"><?= $returnMessage ?></span>
-            <?php endif; ?>
-            <div class="d-flex justify-content-between mt-5">
-                <button class="btn btn-dark" type="submit">Cadastrar</button>
-                <div><a class="btn btn-dark" href=".">Voltar para página inicial</a></div>
-            </div>
-        </form>
+        </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -85,21 +113,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <script type="text/javascript">
         $(() => {
             const alert = $('#alert')
-            
+
             if (alert.text().length > 0) {
                 alert.addClass('alert-warning')
             }
         })
     </script>
     <?php
-        if ($successedRegistration == true) { 
-            echo "<script>
+    if ($successedRegistration == true) {
+        echo "<script>
                     setTimeout(() => { 
                         window.location.href = './login.php'
                     }, 1500)
                 </script>";
-            exit;
-        }
+        exit;
+    }
     ?>
 </body>
+
 </html>
