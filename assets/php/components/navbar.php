@@ -12,7 +12,7 @@ if ($userInSession) {
 
 echo "<nav class='navbar navbar-expand-sm bg-dark p-3 p-md-5'>
         <div class='container-fluid'>
-            <a class='navbar-brand text-light m-0 p-0 me-4 mt-4' href='./index.php'>
+            <a class='navbar-brand text-light m-0 p-0 me-4' id='navbar-brand' href='./index.php'>
                 <img class='logo' src='./assets/img/logo/logo.png'>
             </a>
             <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#collapsed-navbar' aria-expanded='false' aria-controls='#collapsed-navbar'>
