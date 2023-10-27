@@ -6,7 +6,7 @@ echo "
         <div class='row justify-content-md-between justify-content-lg-between pb-5'>
             <div class='col col-md-auto col-lg-auto mb-5'>
                 <a class='text-light m-0 p-0 me-4 text-decoration-none' href='./index.php'>
-                <img class='logo' src='./assets/img/logo/logo.png'>
+                    <img class='logo' src='./assets/img/logo/logo.png'>
                 </a>
             </div>
 
