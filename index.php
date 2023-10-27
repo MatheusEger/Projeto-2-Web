@@ -2,14 +2,6 @@
 include_once('./assets/php/data/var.php');
 
 $mainOffers = array($stranger1, $hp4, $marvel1, $disney14);
-
-$emailSubscribe = '';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['subscribe'])) {
-        $emailSubscribe = $_POST['subscribe'];
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -80,120 +72,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <p class="mb-3">Obrigado por ser parte da comunidade FunkoMania. Estamos empolgados em fazer parte de sua jornada de colecionador e ansiosos para ajudá-lo a encontrar os Funkos dos seus sonhos.</p>
                     </div>
                 </div>
-                <<<<<<< HEAD </div>
-            </section>
-            <section class="main-offers bg-dark p-5">
-                <h3 class="main-offers-title text-white mb-5">Principais Ofertas</h3>
-                <div class="row main-offers-wrapper g-3">
-                    <style>
-                        /* Posicione a figurinha */
-                        .figurinha {
-                            position: absolute;
-                            z-index: 1;
-                            /* Coloca a imagem sobre os elementos do loop */
-                            width: 50px;
-                            /* Defina a largura da figurinha em porcentagem */
-                            height: auto;
-                            /* Mantenha a proporção da imagem original */
-                            top: 0;
-                            /* Defina a posição superior em porcentagem */
-                            left: 10%;
-                            /* Defina a posição esquerda em porcentagem */
-                        }
-                    </style>
-                    =======
-            </section>
-            <section class="main-offers bg-dark p-5">
-                <h3 class="main-offers-title text-white mb-5">Principais Ofertas</h3>
-                <div class="row main-offers-wrapper g-3">
-                    <?php foreach ($mainOffers as $offer) : ?>
-                        <div class="col-md-3">
-                            <a class="text-decoration-none" href="./product.php?product=<?= $offer->getID() ?>">
-                                <div class="card bg-black text-light text-center cursor-pointer">
-                                    <div><img class="card-img-top text-center" src="<?= $offer->getImg() ?>" alt="<?= $offer->getName() ?>"></div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"><?= $offer->getName() ?></h5>
-                                        <p class="card-text"><?= $offer->getPrice() ?></p>
-                                        <button class="btn btn-main-offer text-decoration-none">Adicionar ao Carrinho</button>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </section>
-            <section class="subscribe bg-warning w-100 d-flex align-items-center justify-content-center" id="subscribe-section">
-                <div class="ms-1">
-                    <div>
-                        <div class="mb-5">
-                            <h3 class="fs-1">Inscreva-se</h3>
-                            <span>Se inscreva para ser notificado</span>
-                        </div>
-                        <form class="d-flex flex-column row-gap-2" method="post" id="form-subscribe">
-                            <div>
-                                <label for="subscribe" class="form-label">E-mail</label>
-                                <input type="text" class="form-control" name="subscribe" id="subscribe" maxlength="20">
-                                <div id="valid-feedback"></div>
-                                <div id="invalid-feedback"></div>
-                            </div>
-                            <button type="submit" class="btn btn-dark rounded-pill" id="submit-button">Inscrever-me</button>
-                        </form>
-                    </div>
-                </div>
-                <div id="imageCarousel" class="carousel slide ms-5" style="width: 410px; height: 410px; overflow: hidden;" data-bs-ride="carousel" data-interval="false">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="img-wrapper me-2">
-                                <span class="bg-dark d-inline-block cursor-pointer">
-                                    <img class="m-0" src="./assets/img/harley-dc.png" alt="Eleven Stranger Things">
-                                </span>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="img-wrapper me-2">
-                                <span class="bg-dark d-inline-block cursor-pointer">
-                                    <img class="m-0" src="./assets/img/harry-hp.png" alt="Descrição da segunda imagem">
-                                </span>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="img-wrapper me-2">
-                                <span class="bg-dark d-inline-block cursor-pointer">
-                                    <img class="m-0" src="./assets/img/jack-disney.png" alt="Descrição da terceira imagem">
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="carousel-control-prev" href="#imageCarousel" role="button" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </a>
-                    <a class="carousel-control-next" href="#imageCarousel" role="button" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </a>
-                </div>
-            </section>
-        </main>
-        >>>>>>> 04df32b4b20e547de2a9805d31040d93ede6a21b
-
-        <?php foreach ($mainOffers as $offer) : ?>
-            <div class="col-md-3" style="position: relative;">
-                <a class="text-decoration-none" href="./product.php?product=<?= $offer->getID() ?>">
-                    <div class="card bg-black text-light text-center cursor-pointer">
-                        <div><img class="card-img-top text-center" src="<?= $offer->getImg() ?>" alt="<?= $offer->getName() ?>"></div>
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $offer->getName() ?></h5>
-                            <p class="card-text"><?= $offer->getPrice() ?></p>
-                            <button class="btn btn-main-offer text-decoration-none">Adicionar ao Carrinho</button>
-                        </div>
-                    </div>
-                </a>
-                <img class="figurinha " src="./assets/img/oferta.png" alt="Figurinha">
-            </div>
-        <?php endforeach; ?>
-
     </div>
+    </section>
+    <section class="main-offers bg-dark p-5">
+        <h3 class="main-offers-title text-white mb-5">Principais Ofertas</h3>
+        <div class="row main-offers-wrapper g-3">
+            <style>
+                /* Posicione a figurinha */
+                .figurinha {
+                    position: absolute;
+                    z-index: 1;
+                    /* Coloca a imagem sobre os elementos do loop */
+                    width: 50px;
+                    /* Defina a largura da figurinha em porcentagem */
+                    height: auto;
+                    /* Mantenha a proporção da imagem original */
+                    top: 0;
+                    /* Defina a posição superior em porcentagem */
+                    left: 10%;
+                    /* Defina a posição esquerda em porcentagem */
+                }
+            </style>
+
+            <?php foreach ($mainOffers as $offer) : ?>
+                <div class="col-md-3" style="position: relative;">
+                    <a class="text-decoration-none" href="./product.php?product=<?= $offer->getID() ?>">
+                        <div class="card bg-black text-light text-center cursor-pointer">
+                            <div><img class="card-img-top text-center" src="<?= $offer->getImg() ?>" alt="<?= $offer->getName() ?>"></div>
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $offer->getName() ?></h5>
+                                <p class="card-text"><?= $offer->getPrice() ?></p>
+                                <button class="btn btn-main-offer text-decoration-none">Adicionar ao Carrinho</button>
+                            </div>
+                        </div>
+                    </a>
+                    <img class="figurinha " src="./assets/img/oferta.png" alt="Figurinha">
+                </div>
+            <?php endforeach; ?>
+
+        </div>
     </section>
     <section class="subscribe bg-warning w-100 d-flex align-items-center justify-content-center">
         <div class="ms-2 ms-md-5">
@@ -251,76 +168,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php include_once('./assets/php/components/footer.php') ?>
     </div>
 
-    <div class="modal" tabindex="-1" id="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Nós da FunkoMania agradecemos por entrar para a família <img width="20" height="auto" src="./assets/img/logo/alien-head.png"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        $(() => {
-            const regexEmail = /^\w+\@\w+\.\D+$/
-            let formSubscribe = $('#form-subscribe')
-            let validFeedback = $('#valid-feedback')
-            let invalidFeedback = $('#invalid-feedback')
-            let emailField = $('#subscribe')
-
-            emailField.on('input', () => {
-                let emailFieldVal = $('#subscribe').val()
-
-                if (emailFieldVal.length > 0) {
-                    if (emailFieldVal.match(regexEmail)) {
-                        setValidFeedback('Tudo certo!')
-                    } else {
-                        setInvalidFeedback('Tente um e-mail válido!')
-                    }
-                } else {
-                    setInvalidFeedback('Informe um e-mail')
-                }
-            })
-
-            formSubscribe.on('submit', (e) => {
-                if (!emailField.hasClass('is-valid')) {
-                    e.preventDefault()
-                }
-            })
-
-
-            const setValidFeedback = (message) => {
-                emailField.removeClass('is-invalid').addClass('is-valid')
-                validFeedback.text(message)
-                validFeedback.removeClass('text-danger').addClass('text-success fw-bolder')
-            }
-
-            const setInvalidFeedback = (message) => {
-                emailField.removeClass('is-valid').addClass('is-invalid')
-                validFeedback.text(message)
-                validFeedback.removeClass('text-success').addClass('text-danger fw-bolder')
-            }
-        })
-    </script>
-    <?php if (!(empty($emailSubscribe))) :
-        sleep(1);
-    ?>
-        <script type="text/javascript">
-            const modal = $('#modal')
-
-            modal.show()
-
-            $('#close-modal').on('click', () => {
-                modal.hide()
-            })
-        </script>
-    <?php endif; ?>
 </body>
 
 </html>
