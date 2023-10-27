@@ -2,6 +2,14 @@
 include_once('./assets/php/data/var.php');
 
 $mainOffers = array($stranger1, $hp4, $marvel1, $disney14);
+
+$emailSubscribe = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['subscribe'])) { 
+        $emailSubscribe = $_POST['subscribe']; 
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -100,19 +108,21 @@ $mainOffers = array($stranger1, $hp4, $marvel1, $disney14);
                     <?php endforeach; ?>
                 </div>
             </section>
-            <section class="subscribe bg-warning w-100 d-flex align-items-center justify-content-center">
+            <section class="subscribe bg-warning w-100 d-flex align-items-center justify-content-center" id="subscribe-section">
                 <div class="ms-1">
                     <div>
                         <div class="mb-5">
                             <h3 class="fs-1">Inscreva-se</h3>
                             <span>Se inscreva para ser notificado</span>
                         </div>
-                        <form class="d-flex flex-column row-gap-2">
+                        <form class="d-flex flex-column row-gap-2" method="post" id="form-subscribe">
                             <div>
-                                <label for="exampleFormControlInput1" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1">
+                                <label for="subscribe" class="form-label">E-mail</label>
+                                <input type="text" class="form-control" name="subscribe" id="subscribe" maxlength="20">
+                                <div id="valid-feedback"></div>
+                                <div id="invalid-feedback"></div>
                             </div>
-                            <button class="btn btn-dark rounded-pill">Inscrever-me</button>
+                            <button type="submit" class="btn btn-dark rounded-pill" id="submit-button">Inscrever-me</button>
                         </form>
                     </div>
                 </div>
@@ -155,7 +165,75 @@ $mainOffers = array($stranger1, $hp4, $marvel1, $disney14);
         <?php include_once('./assets/php/components/footer.php') ?>
     </div>
 
+    <div class="modal" tabindex="-1" id="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Nós da FunkoMania agradecemos por entrar para a família <img width="20" height="auto" src="./assets/img/logo/alien-head.png"></p>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(() => {
+            const regexEmail = /^\w+\@\w+\.\D+$/
+            let formSubscribe = $('#form-subscribe')
+            let validFeedback = $('#valid-feedback')
+            let invalidFeedback = $('#invalid-feedback')
+            let emailField = $('#subscribe')
+
+            emailField.on('input', () => {
+                let emailFieldVal = $('#subscribe').val()
+
+                if (emailFieldVal.length > 0) {
+                    if (emailFieldVal.match(regexEmail)) {
+                        setValidFeedback('Tudo certo!')
+                    } else {
+                        setInvalidFeedback('Tente um e-mail válido!')
+                    }
+                } else {
+                    setInvalidFeedback('Informe um e-mail')
+                }
+            })
+
+            formSubscribe.on('submit', (e) => {
+                if (!emailField.hasClass('is-valid')) {
+                    e.preventDefault()
+                }
+            })
+
+
+            const setValidFeedback = (message) => {
+                emailField.removeClass('is-invalid').addClass('is-valid')
+                validFeedback.text(message)
+                validFeedback.removeClass('text-danger').addClass('text-success fw-bolder')
+            }
+
+            const setInvalidFeedback = (message) => {
+                emailField.removeClass('is-valid').addClass('is-invalid')
+                validFeedback.text(message)
+                validFeedback.removeClass('text-success').addClass('text-danger fw-bolder')
+            }
+        })
+    </script>
+    <?php if(!(empty($emailSubscribe))) : 
+        sleep(1);
+    ?>
+        <script type="text/javascript">
+            const modal = $('#modal')
+
+            modal.show()
+
+            $('#close-modal').on('click', () => {
+                modal.hide()
+            })
+        </script>
+    <?php endif; ?>
 </body>
 </html>
