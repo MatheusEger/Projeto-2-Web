@@ -8,24 +8,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    if (empty($email) || empty($password)) { 
-        $returnMessage = 'Preencha os campos obrigatórios';
-    } else {
-        foreach ($users as $user) {
-            $userName = $user->getName();
-            $userEmail = $user->getEmail();
-            $userPassword = $user->getPassword();
+    foreach ($users as $user) {
+        $userName = $user->getName();
+        $userEmail = $user->getEmail();
+        $userPassword = $user->getPassword();
 
-            if (($userEmail == $email) && ($userPassword == $password)) {
+        if (($userEmail == $email) && ($userPassword == $password)) {
 
-                $userInSession = array('name' => $userName, 'email' => $userEmail);
+            $userInSession = array('name' => $userName, 'email' => $userEmail);
 
-                $_SESSION['userInSession'] = $userInSession;
+            $_SESSION['userInSession'] = $userInSession;
 
-                header('Location: ./index.php');
-            } else {
-                $returnMessage = 'Login ou senha incorretos';
-            }
+            header('Location: ./index.php');
+            exit;
+        } else {
+            $returnMessage = 'Login ou senha incorretos';
         }
     }
 }
@@ -49,14 +46,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-md-6 mx-auto">
                     <div class="card shadow p-4">
                         <h3 class="mb-4">Login</h3>
-                        <form class="form" method="post" action="#">
+                        <form class="form" method="post">
                             <div class="mb-3">
-                                <input class="form-control" id="email" name="email" type="email" placeholder="Digite seu endereço de e-mail">
+                                <input type="text" class="form-control" id="email" name="email" maxlength="50" placeholder="Digite seu endereço de e-mail">
+                                <div class="feedback-email"></div>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" id="password" name="password" type="password" placeholder="Digite sua senha">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password" name="password" maxlength="50" placeholder="Digite sua senha">
+                                    <span class="input-group-text cursor-pointer password-hidden password-btn"><i class="bi bi-eye-slash-fill"></i></span>
+                                </div>
+                                <div class="feedback-password"></div>
                             </div>
-                            <?php if (!empty($returnMessage)) : ?>
+                            <?php if ($returnMessage) : ?>
                                 <div class="alert alert-warning"><?= $returnMessage ?></div>
                             <?php endif; ?>
                             <div class="mb-3">
@@ -78,5 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
 </body>
 </html>

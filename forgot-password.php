@@ -10,16 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
 
-    if (empty($email) || empty($password) || empty($password2)) { 
-        $returnMessage = 'Preencha os campos obrigatórios';
-        $successedRedefinition = false;
-    } else {
-        foreach ($users as $user) {
-            if ($user->getEmail() == $email) {
-                $user->setPassword($password);
-                $returnMessage = 'Senha redefinida com sucesso!';
-                $successedRedefinition = true;
-            }
+    foreach ($users as $user) {
+        if ($user->getEmail() == $email) {
+            $user->setPassword($password);
+            $returnMessage = 'Senha redefinida com sucesso!';
+            $successedRedefinition = true;
+        } else {
+            $successedRedefinition = false;
+            $returnMessage = 'Esse e-mail não existe, tente outro!';
         }
     }
 }
@@ -43,15 +41,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-md-6 mx-auto">
                     <div class="card shadow p-4">
                         <h3 class="mb-4">Redefinir Senha</h3>
-                        <form method="post" action="#">
+                        <form class="form" method="post">
                             <div class="mb-3">
-                                <input class="form-control" id="email" name="email" type="email" placeholder="Digite seu endereço de e-mail">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Digite seu endereço de e-mail" maxlength="50">
+                                <div class="feedback-email"></div>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" id="password" name="password" type="password" placeholder="Informe a sua nova senha">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Redefina sua senha aqui" maxlength="50">
+                                    <span class="input-group-text cursor-pointer password-hidden password-btn"><i class="bi bi-eye-slash-fill"></i></span>
+                                </div>
+                                <div class="feedback-password"></div>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" id="password2" name="password2" type="password" placeholder="Confirme a sua nova senha">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirme sua senha" maxlength="50">
+                                    <span class="input-group-text cursor-pointer password-hidden password-btn2"><i class="bi bi-eye-slash-fill"></i></span>
+                                </div>
+                                <div class="feedback-password2"></div>
                             </div>
                             <?php if (!empty($returnMessage)) : ?>
                                 <div class="alert alert-warning" id="alert"><?= $returnMessage ?></div>
@@ -73,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </main>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
     <?php if ($successedRedefinition) : ?>
         <script>
             setTimeout(() => { 

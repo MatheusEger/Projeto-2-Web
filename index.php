@@ -6,8 +6,8 @@ $mainOffers = array($stranger1, $hp4, $marvel1, $disney14);
 $emailSubscribe = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['subscribe'])) { 
-        $emailSubscribe = $_POST['subscribe']; 
+    if (isset($_POST['email'])) { 
+        $emailSubscribe = $_POST['email']; 
     }
 }
 ?>
@@ -105,12 +105,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <h3 class="fs-1">Inscreva-se</h3>
                         <span>Se inscreva para ser notificado</span>
                     </div>
-                    <form class="d-flex flex-column row-gap-2">
-                        <div>
-                            <label for="exampleFormControlInput1" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="exampleFormControlInput1">
-                        </div>
-                        <button class="btn btn-dark rounded-pill">Inscrever-me</button>
+                    <form class="d-flex flex-column row-gap-2" method="post">
+                        <label for="subscribe" class="form-label">E-mail</label>
+                        <input type="text" class="form-control email" name="email" id="email" maxlength="50">
+                        <div class="feedback-email"></div>
+                        <button type="submit" class="btn btn-dark rounded-pill">Inscrever-me</button>
                     </form>
                 </div>
             </div>
@@ -168,48 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        $(() => {
-            const regexEmail = /^\w+\@\w+\.\D+$/
-            let formSubscribe = $('#form-subscribe')
-            let validFeedback = $('#valid-feedback')
-            let invalidFeedback = $('#invalid-feedback')
-            let emailField = $('#subscribe')
-
-            emailField.on('input', () => {
-                let emailFieldVal = $('#subscribe').val()
-
-                if (emailFieldVal.length > 0) {
-                    if (emailFieldVal.match(regexEmail)) {
-                        setValidFeedback('Tudo certo!')
-                    } else {
-                        setInvalidFeedback('Tente um e-mail válido!')
-                    }
-                } else {
-                    setInvalidFeedback('Informe um e-mail')
-                }
-            })
-
-            formSubscribe.on('submit', (e) => {
-                if (!emailField.hasClass('is-valid')) {
-                    e.preventDefault()
-                }
-            })
-
-
-            const setValidFeedback = (message) => {
-                emailField.removeClass('is-invalid').addClass('is-valid')
-                validFeedback.text(message)
-                validFeedback.removeClass('text-danger').addClass('text-success fw-bolder')
-            }
-
-            const setInvalidFeedback = (message) => {
-                emailField.removeClass('is-valid').addClass('is-invalid')
-                validFeedback.text(message)
-                validFeedback.removeClass('text-success').addClass('text-danger fw-bolder')
-            }
-        })
-    </script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
     <?php if ($emailSubscribe) : 
         sleep(1);
     ?>

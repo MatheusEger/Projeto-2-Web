@@ -22,26 +22,22 @@ function createUser($userName, $email, $password, $password2) {
         return 'Usuário cadastrado com sucesso!';
     } else {
         $successedRegistration = false;
-        return 'As senhas não conferem';
+        return 'As senhas não conferem, tente outra vez';
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $userName = $_POST['userName'];
+    $userName = $_POST['user-name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
 
-    if (empty($userName) || empty($email) || empty($password) || empty($password2)) { 
-        $returnMessage = 'Preencha os campos obrigatórios';
-    } else {
-        foreach ($users as $user) {
-            if ($user->getEmail() == $email) {
-                $returnMessage = 'Esse usuário já existe, por favor tente um e-mail diferente';
-                $userAlreadyExist = true;
-                break;
-            }    
-        }
+    foreach ($users as $user) {
+        if ($user->getEmail() == $email) {
+            $returnMessage = 'Esse usuário já existe, por favor tente um e-mail diferente';
+            $userAlreadyExist = true;
+            break;
+        }    
     }
 
     if (!$userAlreadyExist) {
@@ -68,18 +64,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-md-6 mx-auto">
                     <div class="card shadow p-4">
                         <h3 class="mb-4">Cadastro</h3>
-                        <form class="form" method="post" action="#">
+                        <form class="form" method="post">
                             <div class="mb-3">
-                                <input class="form-control" id="email" name="email" type="email" placeholder="Digite seu endereço de e-mail">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Digite seu endereço de e-mail" maxlength="50">
+                                <div class="feedback-email"></div>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" id="userName" name="userName" type="text" placeholder="Digite seu nome">
+                                <input type="text" class="form-control" id="user-name" name="user-name" placeholder="Digite seu nome" maxlength="30">
+                                <div class="feedback"></div>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" id="password" name="password" type="password" placeholder="Crie sua senha aqui">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Crie sua senha aqui" maxlength="50">
+                                    <span class="input-group-text cursor-pointer password-hidden password-btn"><i class="bi bi-eye-slash-fill"></i></span>
+                                </div>
+                                <div class="feedback-password"></div>
                             </div>
                             <div class="mb-3">
-                                <input class="form-control" id="password2" name="password2" type="password" placeholder="Confirme sua senha">
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirme sua senha" maxlength="50">
+                                    <span class="input-group-text cursor-pointer password-hidden password-btn2"><i class="bi bi-eye-slash-fill"></i></span>
+                                </div>
+                                <div class="feedback-password2"></div>
                             </div>
                             <?php if (!empty($returnMessage)) : ?>
                                 <div class="alert alert-warning"><?= $returnMessage ?></div>
@@ -102,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
     <?php if ($successedRegistration) : ?>
         <script>
             setTimeout(() => { 
