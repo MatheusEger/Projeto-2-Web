@@ -138,5 +138,7 @@ if (isset($_GET['product'])) {
             })
         })
     </script>
+
+    <?php include_once('./assets/php/main.php') ?>
 </body>
 </html>

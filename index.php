@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         })
     </script>
-    <?php if($emailSubscribe) : 
+    <?php if ($emailSubscribe) : 
         sleep(1);
     ?>
         <script type="text/javascript">
@@ -224,18 +224,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </script>
     <?php endif; ?>
 
-    <?php if($userInSession) : ?>
-        <script type="text/javascript">
-            $(() => {
-                $('#navbar-brand').addClass('mt-4')
-            })
-        </script>
-    <?php else : ?>
-        <script type="text/javascript">
-            $(() => {
-                $('#navbar-brand').removeClass('mt-4')
-            })
-        </script>
-    <?php endif; ?>
+    <?php include_once('./assets/php/main.php') ?>
 </body>
 </html>

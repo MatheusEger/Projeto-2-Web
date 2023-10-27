@@ -52,5 +52,7 @@ if ($orderCanceled) {
             }, 1500)
         })
     </script>
+    
+    <?php include_once('./assets/php/main.php') ?>
 </body>
 </html>
