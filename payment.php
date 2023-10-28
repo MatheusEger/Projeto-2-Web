@@ -43,28 +43,46 @@ if (!empty($_SESSION['cartProducts'])) {
 <body>
     <main class="p-5">
         <?php if (!(empty($cartProducts))) : ?>
-            <form class="form" method="post" action="./completed-purchase.php">
+            <form class="form" method="post" action="./completed-purchase.php" id="payment-form">
                 <div class="form-section">
                     <h3>ENDEREÇO</h3>
                     <div class="address" id="address">
-                        <input type="text" name="street" id="street" class="form-control" placeholder="rua">
-                        <input type="number" name="street-number" id="street-number" class="form-control" placeholder="numero da rua"> 
-                        <input type="text" name="district" id="district" class="form-control" placeholder="bairro">
-                        <input type="text" name="zip-code" id="zip-code" class="form-control" placeholder="cep">
-                        <input type="text" name="state" id="state" class="form-control" placeholder="uf">
-                        <input type="text" name="city" id="city" class="form-control" placeholder="cidade">
+                        <div class="mb-3">
+                            <input type="text" name="street" id="street" class="form-control" placeholder="rua" maxlength="80">
+                            <div class="feedback-street"></div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="street-number" id="street-number" class="form-control" placeholder="numero da rua" maxlength="5">
+                            <div class="feedback-street-number"></div> 
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="district" id="district" class="form-control" placeholder="bairro" maxlength="50">
+                            <div class="feedback-district"></div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="zip-code" id="zip-code" class="form-control" placeholder="cep">
+                            <div class="feedback-zip-code"></div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="state" id="state" class="form-control" placeholder="uf">
+                            <div class="feedback-state"></div>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" name="city" id="city" class="form-control" placeholder="cidade" maxlength="50">
+                            <div class="feedback-city"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-section" id="payment-form-wrapper" style="display: none;">
                     <h3>FORMA DE PAGAMENTO</h3>
                     <div class="payment-form" id="payment-form">
-                        <select class="form-select" name="payment-form-select" id="payment-form-select">
+                        <select class="form-select mb-3" name="payment-form-select" id="payment-form-select">
                             <option value="default" selected>Selecione o tipo</option>
                             <option value="credit">Cartão de Crédito</option>
                             <option value="debit">Cartão de Débito</option>
                             <option value="pix">Pix</option>
                         </select>
-                        <div id="card-brands" style="display: none;">
+                        <div class="mb-3" id="card-brands" style="display: none;">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="card-brand" id="mastercard" value="mastercard" checked>
                                 <a href="https://www.flaticon.com/free-icons/mastercard" title="mastercard icons">
@@ -115,21 +133,25 @@ if (!empty($_SESSION['cartProducts'])) {
                             </div>
                         </div>
                         <div id="card-info" style="display: none;">
-                            <div>
+                            <div class="mb-3">
                                 <label for="cardholder-name">Nome no cartão</label>
-                                <input type="text" name="cardholder-name" id="cardholder-name" class="form-control" placeholder="nome no cartão" type="text">
+                                <input type="text" name="cardholder-name" id="cardholder-name" class="form-control" placeholder="nome no cartão" type="text" maxlength="40">
+                                <div class="feedback-cardholder-name"></div>
                             </div>
-                            <div>
+                            <div class="mb-3">
                                 <label for="card-number">Número</label>
                                 <input type="text" name="card-number" id="card-number" class="form-control" placeholder="número" type="text">
+                                <div class="feedback-card-number"></div>
                             </div>
-                            <div>
+                            <div class="mb-3">
                                 <label for="security-code">Código</label>
                                 <input type="text" name="security-code" id="security-code" class="form-control" placeholder="código" type="text">
+                                <div class="feedback-security-code"></div>
                             </div>
-                            <div>
+                            <div class="mb-3">
                                 <label for="expiration-date">Data de Validade</label>
-                                <input type="date" name="expiration-date" id="expiration-date" class="form-control">
+                                <input type="text" name="expiration-date" id="expiration-date" class="form-control" placeholder="mm/aaaa">
+                                <div class="feedback-expiration-date"></div>
                             </div>
                         </div>
                         <div id="installments-wrapper" style="display: none;">
@@ -247,6 +269,7 @@ if (!empty($_SESSION['cartProducts'])) {
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./assets/js/main.js"></script>
     <script type="text/javascript">
         $(() => {
             $(document).ready(() => {
@@ -274,10 +297,12 @@ if (!empty($_SESSION['cartProducts'])) {
                 const purchaseTotal = $('#purchase-total')
 
                 /*masks*/
+                $('#street-number').mask('00000')
                 $('#zip-code').mask('00000-000')
                 $('#state').mask('SS')
                 $('#card-number').mask('0000 0000 0000 0000')
                 $('#security-code').mask('000')
+                $('#expiration-date').mask('00/0000')
 
                 fieldsWatch(address, display, paymentFormWrapper, displayNone, paymentFormWrapper)
 
