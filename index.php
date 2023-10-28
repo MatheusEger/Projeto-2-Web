@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <div><img class="card-img-top text-center" src="<?= $offer->getImg() ?>" alt="<?= $offer->getName() ?>"></div>
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $offer->getName() ?></h5>
-                                    <p class="card-text"><?= $offer->getPrice() ?></p>
+                                    <p class="card-text">R$<?= $offer->getPrice() ?></p>
                                     <button class="btn btn-main-offer text-decoration-none">Adicionar ao Carrinho</button>
                                 </div>
                             </div>
