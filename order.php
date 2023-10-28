@@ -7,7 +7,7 @@ if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
     $orderId = $_GET['orderId'];
     $userInSession = $_SESSION['userInSession']['email'];
 
-    if (!(empty($_SESSION['userOrders']))) {
+    if (isset($_SESSION['userOrders'][$userInSession])) {
         $userOrders = $_SESSION['userOrders'][$userInSession];
     }
 }
