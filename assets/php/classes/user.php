@@ -1,6 +1,6 @@
 <?php
 class User {
-    private $name, $email, $password;
+    private $name, $email, $password, $orders;
 
     public function __construct($name, $email, $password) {
         $this->name = $name;
@@ -30,6 +30,14 @@ class User {
 
     public function getEmail() {
         return $this->email;
+    }
+
+    public function setOrder($order) {
+        $this->orders[] = $order;
+    }
+
+    public function getOrders() {
+        return $this->orders;
     }
 }
 ?>
