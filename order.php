@@ -35,13 +35,13 @@ if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
                         <div class="container mb-1 p-2 p-md-6 p-lg-5 border rounded">
                             <div class="row">
                                 <div class="col">
-                                    <p class="bolder-font-500">Endereço de entrega</p>
+                                    <p class="fw-bolder">Endereço de entrega</p>
                                     <p class="lh-1"><?= $userOrders[$orderId]['address']['street'] ?>, <?= $userOrders[$orderId]['address']['streetNumber'] ?>. <?= $userOrders[$orderId]['address']['district'] ?></p>
                                     <p class="lh-1">CEP: <?= $userOrders[$orderId]['address']['zipCode'] ?></p>
                                     <p class="lh-1"><?= $userOrders[$orderId]['address']['city'] ?>, <?= $userOrders[$orderId]['address']['state'] ?></p>
                                 </div>
                                 <div class="col" id="card-info">
-                                    <p class="bolder-font-500">Forma de pagamento</p>
+                                    <p class="fw-bolder">Forma de pagamento</p>
                                     <p class="lh-1"><?= $userOrders[$orderId]['paymentInfo']['paymentMethod'] ?></p>
                                     <?php 
                                         if (
@@ -51,7 +51,7 @@ if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
                                         ) : 
                                         $cardBrand = 'Bandeira: ' . strtoupper($userOrders[$orderId]['paymentInfo']['cardBrand']);
                                         $cardNumber = 'Cartão final: **** ' . substr($userOrders[$orderId]['paymentInfo']['cardNumber'], -4);
-                                        $expirationDate = 'Data de Validade: ' .date('d/m/Y', strtotime($userOrders[$orderId]['paymentInfo']['expirationDate']));
+                                        $expirationDate = 'Data de Validade: ' . $userOrders[$orderId]['paymentInfo']['expirationDate'];
                                     ?>
                                         <p class="lh-1"><?= $cardBrand ?></p>
                                         <p class="lh-1"><?= $cardNumber ?></p>
@@ -64,7 +64,7 @@ if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
                                     <?php endif; ?>
                                 </div>
                                 <div class="col" id="order-info">
-                                    <p class="bolder-font-500">Resumo do pedido</p>
+                                    <p class="fw-bolder">Resumo do pedido</p>
                                     <p class="lh-1">Subtotal: R$<?= $userOrders[$orderId]['paymentInfo']['subtotal'] ?></p>
                                     <p class="lh-1">Entrega: FRETE GRÁTIS</p>
                                     <p class="lh-1 fw-bolder">Total: R$<?= $userOrders[$orderId]['paymentInfo']['total'] ?></p>
@@ -78,7 +78,7 @@ if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
                                 <div class="col">
                                     <?php foreach($userOrders[$orderId]['cartProducts'] as $product) : ?>
                                         <img src="<?=$product->getImg()?>" style="max-width: 10vw;">
-                                        <span class="bolder-font-500"><?=$product->getProductName()?></span>
+                                        <span class="fw-bolder"><?=$product->getProductName()?></span>
                                     <?php endforeach; ?>
                                 </div>
                             </div>
