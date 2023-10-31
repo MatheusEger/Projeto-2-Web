@@ -32,8 +32,12 @@ class User {
         return $this->email;
     }
 
-    public function setOrder($order) {
+    public function addOrder($order) {
         $this->orders[] = $order;
+    }
+
+    public function setOrders($orders) {
+        $this->orders = $orders;
     }
 
     public function getOrders() {
