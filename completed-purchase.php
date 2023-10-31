@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     foreach ($users as $user) {
         if ($user->getEmail() == $userInSession) {
-            $user->setOrder($order);
+            $user->addOrder($order);
         }
     }
 
