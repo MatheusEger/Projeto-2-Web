@@ -2,13 +2,16 @@
 include_once('./assets/php/data/var.php');
 
 $userOrders = array();
+$users = $_SESSION['users'];
 
 if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
     $orderId = $_GET['orderId'];
     $userInSession = $_SESSION['userInSession']['email'];
 
-    if (isset($_SESSION['userOrders'][$userInSession])) {
-        $userOrders = $_SESSION['userOrders'][$userInSession];
+    foreach ($users as $user) {
+        if ($user->getEmail() == $userInSession) {
+            $userOrders = $user->getOrders();
+        }
     }
 }
 ?>

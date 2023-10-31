@@ -8,7 +8,8 @@ if (isset($_SESSION['userInSession']['email'])) {
 }
 
 $cartProducts = $_SESSION['cartProducts'];
-$userOrders = $_SESSION['userOrders'];
+$users = $_SESSION['users'];
+$userOrder = array();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userStreet = $_POST['street'];
@@ -69,8 +70,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'paymentInfo' => $userPaymentInfo, 
         'cartProducts' => $cartProducts
     );
-    $userOrders[$userInSession][] = $order;
-    $_SESSION['userOrders'] = $userOrders;  
+
+    foreach ($users as $user) {
+        if ($user->getEmail() == $userInSession) {
+            $user->setOrder($order);
+        }
+    }
 
     unset($_SESSION['cartProducts']);
     $_SESSION['qntProductsTotal'] = 0;
