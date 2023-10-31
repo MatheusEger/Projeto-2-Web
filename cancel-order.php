@@ -3,22 +3,30 @@ include_once('./assets/php/data/var.php');
 
 $orderCanceled = false;
 $returnMessage = '';
+$users = $_SESSION['users'];
+$orders = '';
 
 if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
     $userInSession = $_SESSION['userInSession']['email'];
     $orderIdToRemove = $_GET['orderId'];
-    $userOrders = $_SESSION['userOrders'][$userInSession];
+    
+    foreach ($users as $user) {
+        if ($user->getEmail() == $userInSession) {
+            $orders = $user->getOrders();
 
-    foreach ($userOrders as $key => $order) {
-        if ($key == $orderIdToRemove) {
-            unset($userOrders[$key]);
-            $orderCanceled = true;
+            foreach ($orders as $key => $order) {
+                if ($key == $orderIdToRemove) { 
+                    unset($orders[$key]);
+                    $orderCanceled = true;
+                    $user->setOrders($orders);
+                    break 2;
+                }
+            }
         }
     }
 }
 
 if ($orderCanceled) {
-    $_SESSION['userOrders'][$userInSession] = array_values($userOrders);
     $returnMessage = 'Pedido cancelado com sucesso';
 } else {
     $returnMessage = 'Pedido não encontrado';
