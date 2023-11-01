@@ -38,7 +38,7 @@ if (isset($_GET['category'])) {
                                 <div><img class="card-img-top text-center" src="<?= $product->getImg() ?>" alt="<?= $product->getName() ?>"></div>
                                 <div class="card-body">
                                     <h5 class="card-title"><?= $product->getName() ?></h5>
-                                    <p class="card-text"><?= $product->getPrice() ?></p>
+                                    <p class="card-text">R$<?= $product->getPrice() ?></p>
                                     <button class="btn btn-main-offer">Adicionar ao Carrinho</button>
                                 </div>
                             </div>

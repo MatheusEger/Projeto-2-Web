@@ -64,7 +64,7 @@ if (isset($_GET['product'])) {
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <div id="clicked-product-price"><?= $productPrice ?></div>
+                                            <div id="clicked-product-price">R$<?= $productPrice ?></div>
                                         </div>
                                     </div>
                                     <div class="row mt-2 row-cols-auto">
