@@ -46,14 +46,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-md-6 mx-auto">
                     <div class="card shadow p-4">
                         <h3 class="mb-4">Login</h3>
-                        <form class="form" method="post">
+                        <form class="form form-register" method="post">
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="email" name="email" maxlength="50" placeholder="Digite seu endereço de e-mail">
+                                <input type="text" class="form-control register-input" id="email" name="email" maxlength="50" placeholder="Digite seu endereço de e-mail">
                                 <div class="feedback-email"></div>
                             </div>
                             <div class="mb-3">
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="password" name="password" maxlength="50" placeholder="Digite sua senha">
+                                    <input type="password" class="form-control register-input" id="password" name="password" maxlength="50" placeholder="Digite sua senha">
                                     <span class="input-group-text cursor-pointer password-hidden password-btn"><i class="bi bi-eye-slash-fill"></i></span>
                                 </div>
                                 <div class="feedback-password"></div>

@@ -64,25 +64,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="col-md-6 mx-auto">
                     <div class="card shadow p-4">
                         <h3 class="mb-4">Cadastro</h3>
-                        <form class="form" method="post">
+                        <form class="form form-register" method="post">
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="email" name="email" placeholder="Digite seu endereço de e-mail" maxlength="50">
+                                <input type="text" class="form-control register-input" id="email" name="email" placeholder="Digite seu endereço de e-mail" maxlength="50">
                                 <div class="feedback-email"></div>
                             </div>
                             <div class="mb-3">
-                                <input type="text" class="form-control" id="user-name" name="user-name" placeholder="Digite seu nome" maxlength="30">
+                                <input type="text" class="form-control register-input" id="user-name" name="user-name" placeholder="Digite seu nome" maxlength="30">
                                 <div class="feedback"></div>
                             </div>
                             <div class="mb-3">
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Crie sua senha aqui" maxlength="50">
+                                    <input type="password" class="form-control register-input" id="password" name="password" placeholder="Crie sua senha aqui" maxlength="50">
                                     <span class="input-group-text cursor-pointer password-hidden password-btn"><i class="bi bi-eye-slash-fill"></i></span>
                                 </div>
                                 <div class="feedback-password"></div>
                             </div>
                             <div class="mb-3">
                                 <div class="input-group">
-                                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirme sua senha" maxlength="50">
+                                    <input type="password" class="form-control register-input" id="password2" name="password2" placeholder="Confirme sua senha" maxlength="50">
                                     <span class="input-group-text cursor-pointer password-hidden password-btn2"><i class="bi bi-eye-slash-fill"></i></span>
                                 </div>
                                 <div class="feedback-password2"></div>

@@ -105,9 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <h3 class="fs-1">Inscreva-se</h3>
                         <span>Se inscreva para ser notificado</span>
                     </div>
-                    <form class="d-flex flex-column row-gap-2" method="post">
+                    <form class="form form-register d-flex flex-column row-gap-2" method="post">
                         <label for="subscribe" class="form-label">E-mail</label>
-                        <input type="text" class="form-control email" name="email" id="email" maxlength="50">
+                        <input type="text" class="form-control register-input" name="email" id="email" maxlength="50">
                         <div class="feedback-email"></div>
                         <button type="submit" class="btn btn-dark rounded-pill">Inscrever-me</button>
                     </form>
