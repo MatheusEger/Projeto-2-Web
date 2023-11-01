@@ -10,7 +10,7 @@ $(() => {
 
     $('.form-payment').on('submit', function(e) {
         let response = validateForm($(this), $('.address-input'))
-        if ($('#payment-form-select').val() != 'pix') { response = validateForm($(this), $('.card-input')) }
+        if ($('#payment-form-select').val() != 'pix') { response = validateForm($(this), $('input')) }
         if (!response) { e.preventDefault() }
     })
 

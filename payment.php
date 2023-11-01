@@ -44,7 +44,7 @@ if (!empty($_SESSION['cartProducts'])) {
     <main class="p-5">
         <?php if (!(empty($cartProducts))) : ?>
             <form class="form form-payment" method="post" action="./completed-purchase.php" id="payment-form">
-                <div class="form-section">
+                <div class="form-section mb-5">
                     <h3>ENDEREÇO</h3>
                     <div class="address" id="address">
                         <div class="mb-3">
@@ -73,7 +73,7 @@ if (!empty($_SESSION['cartProducts'])) {
                         </div>
                     </div>
                 </div>
-                <div class="form-section" id="payment-form-wrapper" style="display: none;">
+                <div class="form-section mb-5" id="payment-form-wrapper" style="display: none;">
                     <h3>FORMA DE PAGAMENTO</h3>
                     <div class="payment-form" id="payment-form">
                         <select class="form-select mb-3" name="payment-form-select" id="payment-form-select">
@@ -123,7 +123,7 @@ if (!empty($_SESSION['cartProducts'])) {
                     <div>
                         <div id="pix-info" style="display: none;">
                             <div>
-                                <span>Envie para a nossa chave dentre o período de 24hr: <chave> </span>
+                                <span>Envie para a nossa chave dentre o período de 24hr: <span class="fw-bolder">49999999999<span> </span>
                                 <div>
                                     <span>Ou envie pelo QRCode</span><br>
                                     <a href="https://www.flaticon.com/free-icons/qr-code" title="qr code icons">
@@ -135,22 +135,22 @@ if (!empty($_SESSION['cartProducts'])) {
                         <div id="card-info" style="display: none;">
                             <div class="mb-3">
                                 <label for="cardholder-name">Nome no cartão</label>
-                                <input type="text" name="cardholder-name" id="cardholder-name" class="form-control card-input" placeholder="nome no cartão" type="text" maxlength="40">
+                                <input type="text" name="cardholder-name" id="cardholder-name" class="form-control" placeholder="nome no cartão" type="text" maxlength="40">
                                 <div class="feedback-cardholder-name"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="card-number">Número</label>
-                                <input type="text" name="card-number" id="card-number" class="form-control card-input" placeholder="número" type="text">
+                                <input type="text" name="card-number" id="card-number" class="form-control" placeholder="número" type="text">
                                 <div class="feedback-card-number"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="security-code">Código</label>
-                                <input type="text" name="security-code" id="security-code" class="form-control card-input" placeholder="código" type="text">
+                                <input type="text" name="security-code" id="security-code" class="form-control" placeholder="código" type="text">
                                 <div class="feedback-security-code"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="expiration-date">Data de Validade</label>
-                                <input type="text" name="expiration-date" id="expiration-date" class="form-control card-input" placeholder="mm/aaaa">
+                                <input type="text" name="expiration-date" id="expiration-date" class="form-control" placeholder="mm/aaaa">
                                 <div class="feedback-expiration-date"></div>
                             </div>
                         </div>
