@@ -4,7 +4,6 @@ include_once('./assets/php/data/var.php');
 $cartProducts = $_SESSION['cartProducts'];
 
 if (isset($_GET['product'])) {
-    global $totalPrice;
     $productId = $_GET['product'];
     $quantity = isset($_GET['quantity']) ? (int)$_GET['quantity'] : 1;
     $_SESSION['qntProductsTotal'] += $quantity;
