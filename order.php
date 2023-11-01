@@ -41,7 +41,7 @@ if (isset($_GET['orderId']) && isset($_SESSION['userInSession']['email'])) {
                                     <p class="fw-bolder">Endereço de entrega</p>
                                     <p class="lh-1"><?= $userOrders[$orderId]['address']['street'] ?>, <?= $userOrders[$orderId]['address']['streetNumber'] ?>. <?= $userOrders[$orderId]['address']['district'] ?></p>
                                     <p class="lh-1">CEP: <?= $userOrders[$orderId]['address']['zipCode'] ?></p>
-                                    <p class="lh-1"><?= $userOrders[$orderId]['address']['city'] ?>, <?= $userOrders[$orderId]['address']['state'] ?></p>
+                                    <p class="lh-1"><?= $userOrders[$orderId]['address']['city'] ?>, <?= strtoupper($userOrders[$orderId]['address']['state']) ?></p>
                                 </div>
                                 <div class="col" id="card-info">
                                     <p class="fw-bolder">Forma de pagamento</p>
