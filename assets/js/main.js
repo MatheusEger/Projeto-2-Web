@@ -3,21 +3,15 @@ $(() => {
     const regexNumber = /^\d/
     const regexAlpha = /^\D/
 
-    $('form').on('submit', (e) => {
-        const form = $('form')
-        let isValid = true
+    $('.form-register').on('submit', function(e) { 
+        let response = validateForm($(this), $('.register-input'))
+        if (!response) { e.preventDefault() } 
+    })
 
-        form.find('input').each(function() {
-            if ($(this).val().length == 0) {
-                isValid = false
-            }
-
-            if ($(this).hasClass('is-invalid')) {
-                isValid = false
-            }
-        })
-
-        if (!isValid) { e.preventDefault() }
+    $('.form-payment').on('submit', function(e) {
+        let response = validateForm($(this), $('.address-input'))
+        if ($('#payment-form-select').val() != 'pix') { response = validateForm($(this), $('.card-input')) }
+        if (!response) { e.preventDefault() }
     })
 
     $('#user-name').on('input', () => { validateBlankField($('#user-name'), $('#user-name').val(), $('.feedback')) })
@@ -64,20 +58,6 @@ $(() => {
 
     $('.password-btn').on('click', () => { passwordBtnOnChange($('.password-btn'), $('#password')) })
     $('.password-btn2').on('click', () => { passwordBtnOnChange($('.password-btn2'), $('#password2')) })
-
-    const passwordBtnOnChange = (btn, input) => {
-        if (btn.hasClass('password-hidden')) {
-            btn.removeClass('password-hidden').addClass('password-visible')
-            btn.html('')
-            btn.html('<i class="bi bi-eye-fill"></i>')
-            input.prop('type', 'text')
-        } else {
-            btn.removeClass('password-visible').addClass('password-hidden')
-            btn.html('')
-            btn.html('<i class="bi bi-eye-slash-fill"></i>')
-            input.prop('type', 'password')
-        }
-    }
 
     /*payment form*/
     $('#street').on('input', function() { validateBlankField($(this), $(this).val(), $('.feedback-street')) })
@@ -188,5 +168,31 @@ $(() => {
         } else if (fieldValue.length == maskNumber) {
             setValidFeedback(field, validMsg, feedbackDiv)
         }
+    }
+
+    const passwordBtnOnChange = (btn, input) => {
+        btn.html('')
+
+        if (btn.hasClass('password-hidden')) {
+            btn.removeClass('password-hidden').addClass('password-visible')
+            btn.html('<i class="bi bi-eye-fill"></i>')
+            input.prop('type', 'text')
+        } else {
+            btn.removeClass('password-visible').addClass('password-hidden')
+            btn.html('<i class="bi bi-eye-slash-fill"></i>')
+            input.prop('type', 'password')
+        }
+    }
+
+    const validateForm = (form, input) => {
+        let isValid = true
+
+        form.find(input).each(function() {
+            if (($(this).val().length == 0) || ($(this).hasClass('is-invalid'))) {
+                isValid = false
+            }
+        })
+
+        return isValid
     }
 })
