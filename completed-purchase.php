@@ -36,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $userPaymentMethod = 'Pix';
     }
 
+    $subtotal = number_format($_SESSION['totalPriceCart'], 2, ',','.');
     $totalPriceCart = number_format($_SESSION['totalPriceCart'], 2, ',','.');
 
     if (strpos($userInstallments, '5X') !== false ) {
@@ -61,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'securityCode' => $userSecurityCode, 
         'expirationDate' => $userExpirationDate, 
         'installments' => $userInstallments, 
-        'subtotal' => $_SESSION['totalPriceCart'], 
+        'subtotal' => $subtotal, 
         'total' => $totalPriceCart
     );
 
