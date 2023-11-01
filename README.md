@@ -1,6 +1,6 @@
 # :alien: FunkoMania
 
-Segundo projeto da disciplina de Programação WEB do curso de Sistemas de Informação - IFSC com foco na construção de site e-commerce inspirada na Funko Store.
+Segundo projeto da disciplina de Programação WEB do curso de Sistemas de Informação - IFSC com foco na construção de site e-commerce, inspirada na <a href="https://funko.com/">Funko Store</a>.
 <img src="./assets//img/readme-cover.png">
 
 ## Instalação
