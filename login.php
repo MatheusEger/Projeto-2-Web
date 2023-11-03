@@ -53,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                             <div class="mb-3">
                                 <div class="input-group">
-                                    <input type="password" class="form-control register-input" id="password" name="password" maxlength="50" placeholder="Digite sua senha">
+                                    <input type="password" class="form-control register-input" id="password-login" name="password-login" maxlength="50" placeholder="Digite sua senha">
                                     <span class="input-group-text cursor-pointer password-hidden password-btn"><i class="bi bi-eye-slash-fill"></i></span>
                                 </div>
-                                <div class="feedback-password"></div>
+                                <div id="feedback-password-login"></div>
                             </div>
                             <?php if ($returnMessage) : ?>
                                 <div class="alert alert-warning"><?= $returnMessage ?></div>
