@@ -10,20 +10,15 @@ $userAlreadyExist = false;
 function createUser($userName, $email, $password, $password2) {
     global $successedRegistration;
 
-    if ($password == $password2) {
-        $user = new User(
-            $userName,
-            $email,
-            $password
-        );
+    $user = new User(
+        $userName,
+        $email,
+        $password
+    );
 
-        $_SESSION['users'][] = $user;   
-        $successedRegistration = true;
-        return 'Usuário cadastrado com sucesso!';
-    } else {
-        $successedRegistration = false;
-        return 'As senhas não conferem, tente outra vez';
-    }
+    $_SESSION['users'][] = $user;   
+    $successedRegistration = true;
+    return 'Usuário cadastrado com sucesso!';
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
