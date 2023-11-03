@@ -8,6 +8,7 @@ if (isset($_GET['product'])) {
     $quantity = isset($_GET['quantity']) ? (int)$_GET['quantity'] : 1;
     $_SESSION['qntProductsTotal'] += $quantity;
     $cartObj = null;
+    $differentProduct = false;
 
     header('Location: ./cart.php');
 
@@ -33,12 +34,14 @@ if (isset($_GET['product'])) {
         foreach ($cartProducts as $item) {
             if ($item->getProductID() == $productId) {
                 $item->setQnt($item->getQnt() + $quantity);
+                $differentProduct = true;
                 break;
-            } else {
-                $_SESSION['cartProducts'][] = $cartObj;
-                break;
-            }
+            } 
         }
+    }
+
+    if (!$differentProduct) {
+        $_SESSION['cartProducts'][] = $cartObj;
     }
 }
 
