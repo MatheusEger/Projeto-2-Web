@@ -23,6 +23,7 @@ Segundo projeto da disciplina de Programação WEB do curso de Sistemas de Infor
 - [ ] Lupa de pesquisa
 - [x] Responsividade
 - [ ] Limite de quantidade de produtos no carrinho
+- [ ] Delete e update de conta de usuário
 
 ## Tecnologias utilizadas
 
