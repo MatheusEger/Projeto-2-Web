@@ -2,7 +2,7 @@
 
 Segundo projeto da disciplina de Programação WEB do curso de Sistemas de Informação - IFSC com foco na construção de site e-commerce, inspirada na <a target="_blank" href="https://funko.com/">Funko Store</a>.
 
-<img src="./assets//img/readme-cover.png">
+<img src="./assets/img/readme-cover.png">
 
 ## Instalação
 
@@ -22,6 +22,7 @@ Segundo projeto da disciplina de Programação WEB do curso de Sistemas de Infor
 - [x] Resumo de pedidos
 - [ ] Lupa de pesquisa
 - [x] Responsividade
+- [ ] Limite de quantidade de produtos no carrinho
 
 ## Tecnologias utilizadas
 
