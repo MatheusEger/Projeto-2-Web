@@ -38,10 +38,10 @@ if (isset($_GET['product'])) {
                 break;
             } 
         }
-    }
 
-    if (!$differentProduct) {
-        $_SESSION['cartProducts'][] = $cartObj;
+        if (!$differentProduct) {
+            $_SESSION['cartProducts'][] = $cartObj;
+        }
     }
 }
 
