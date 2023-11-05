@@ -6,7 +6,7 @@ $users = $_SESSION['users'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = $_POST['password-login'];
 
     foreach ($users as $user) {
         $userName = $user->getName();
