@@ -36,8 +36,20 @@ $(() => {
             setInvalidFeedback($(this), 'Sua senha precisa ter no mínimo 8 caracteres', $('#feedback-password-login'))
         }
     })
-    $('#password').on('input', function() { validatePassword($(this), $(this).val(), $('.feedback-password')) })
-    $('#password2').on('input', function() { validatePassword($(this), $(this).val(), $('.feedback-password2')) })
+    $('#password').on('input', function() { 
+        let feedbackDiv = $('.feedback-password')
+        let fieldToCompare = $('#password2')
+        let fieldValueToCompare = fieldToCompare.val()
+        let feedbackDivToCompare = $('.feedback-password2')
+        validatePassword($(this), $(this).val(), feedbackDiv, fieldToCompare, fieldValueToCompare, feedbackDivToCompare) 
+    })
+    $('#password2').on('input', function() { 
+        let feedbackDiv = $('.feedback-password2')
+        let fieldToCompare = $('#password')
+        let fieldValueToCompare = fieldToCompare.val()
+        let feedbackDivToCompare = $('.feedback-password')
+        validatePassword($(this), $(this).val(), feedbackDiv, fieldToCompare, fieldValueToCompare, feedbackDivToCompare) 
+    })
     $('.password-btn').on('click', function() { passwordBtnOnChange($(this), $('#password')) })
     $('.password-btn2').on('click', function() { passwordBtnOnChange($(this), $('#password2')) })
 
@@ -178,22 +190,14 @@ $(() => {
         return isValid
     }
 
-    const validatePassword = (field, fieldValue, feedbackDiv) => {
-        let passwordField = $('#password')
-        let passwordFieldValue = passwordField.val()
-        let passwordDivFeedback = $('.feedback-password')
-        let password2Field = $('#password2')
-        let password2FieldValue = password2Field.val()
-        let password2DivFeedback = $('.feedback-password2')
-
+    const validatePassword = (field, fieldValue, feedbackDiv, fieldToCompare, fieldValueToCompare, feedbackDivToCompare) => {
         if (fieldValue.length > 8) {
             setValidFeedback(field, successMsg, feedbackDiv)
-            if (passwordFieldValue != password2FieldValue) {
-                setInvalidFeedback(passwordField, 'As senhas não conferem!', passwordDivFeedback)
-                setInvalidFeedback(password2Field, 'As senhas não conferem!', password2DivFeedback)
+            if (fieldValue != fieldValueToCompare) {
+                setInvalidFeedback(field, 'As senhas não conferem!', feedbackDiv)
             } else {
-                setValidFeedback(passwordField, successMsg, passwordDivFeedback)
-                setValidFeedback(password2Field, successMsg, password2DivFeedback)
+                setValidFeedback(field, successMsg, feedbackDiv)
+                setValidFeedback(fieldToCompare, successMsg, feedbackDivToCompare)
             }
         } else {
             setInvalidFeedback(field, 'Sua senha precisa ter no mínimo 8 caracteres', feedbackDiv)
