@@ -41,34 +41,37 @@ if (!empty($_SESSION['cartProducts'])) {
     <title>FunkoMania</title>
 </head>
 <body>
-    <main class="p-5">
+    <main class="container p-5">
         <?php if (!(empty($cartProducts))) : ?>
+            <h1>Filizando sua compra!</h1>
+        </br>
+        
             <form class="form form-payment" method="post" action="./completed-purchase.php" id="payment-form">
                 <div class="form-section mb-5">
                     <h3>ENDEREÇO</h3>
                     <div class="address" id="address">
                         <div class="mb-3">
-                            <input type="text" name="street" id="street" class="form-control address-input" placeholder="rua" maxlength="80">
+                            <input type="text" name="street" id="street" class="form-control address-input" placeholder="Rua" maxlength="80">
                             <div class="feedback-street"></div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" name="street-number" id="street-number" class="form-control address-input" placeholder="numero da rua" maxlength="5">
+                            <input type="text" name="street-number" id="street-number" class="form-control address-input" placeholder="Numero da rua" maxlength="5">
                             <div class="feedback-street-number"></div> 
                         </div>
                         <div class="mb-3">
-                            <input type="text" name="district" id="district" class="form-control address-input" placeholder="bairro" maxlength="50">
+                            <input type="text" name="district" id="district" class="form-control address-input" placeholder="Bairro" maxlength="50">
                             <div class="feedback-district"></div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" name="zip-code" id="zip-code" class="form-control address-input" placeholder="cep">
+                            <input type="text" name="zip-code" id="zip-code" class="form-control address-input" placeholder="CEP">
                             <div class="feedback-zip-code"></div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" name="state" id="state" class="form-control address-input" placeholder="uf">
+                            <input type="text" name="state" id="state" class="form-control address-input" placeholder="UF">
                             <div class="feedback-state"></div>
                         </div>
                         <div class="mb-3">
-                            <input type="text" name="city" id="city" class="form-control address-input" placeholder="cidade" maxlength="50">
+                            <input type="text" name="city" id="city" class="form-control address-input" placeholder="Cidade" maxlength="50">
                             <div class="feedback-city"></div>
                         </div>
                     </div>
@@ -135,22 +138,22 @@ if (!empty($_SESSION['cartProducts'])) {
                         <div id="card-info" style="display: none;">
                             <div class="mb-3">
                                 <label for="cardholder-name">Nome no cartão</label>
-                                <input type="text" name="cardholder-name" id="cardholder-name" class="form-control" placeholder="nome no cartão" type="text" maxlength="40">
+                                <input type="text" name="cardholder-name" id="cardholder-name" class="form-control" placeholder="Nome no cartão" type="text" maxlength="40">
                                 <div class="feedback-cardholder-name"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="card-number">Número</label>
-                                <input type="text" name="card-number" id="card-number" class="form-control" placeholder="número" type="text">
+                                <input type="text" name="card-number" id="card-number" class="form-control" placeholder="Número" type="text">
                                 <div class="feedback-card-number"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="security-code">Código</label>
-                                <input type="text" name="security-code" id="security-code" class="form-control" placeholder="código" type="text">
+                                <input type="text" name="security-code" id="security-code" class="form-control" placeholder="Código" type="text">
                                 <div class="feedback-security-code"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="expiration-date">Data de Validade</label>
-                                <input type="text" name="expiration-date" id="expiration-date" class="form-control" placeholder="mm/aaaa">
+                                <input type="text" name="expiration-date" id="expiration-date" class="form-control" placeholder="MM/AAAA">
                                 <div class="feedback-expiration-date"></div>
                             </div>
                         </div>

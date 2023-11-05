@@ -121,3 +121,238 @@ svg {
         opacity: .9;
     }
 }
+
+
+*{
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+.fs-1{
+    font-weight: 900;
+}
+
+.about-us{
+    padding: 5%;
+}
+
+.card{
+    flex: 1;
+    height: 500px;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+.card-text{
+    position:absolute;
+    bottom:15%;
+    left: 10%;
+    right: 10%;
+}
+
+.card-title{
+    position:absolute;
+    bottom:25%;
+    left: 10%;
+    right: 10%;
+}
+
+@media (max-width: 1200px){
+    .card{
+        height: 450px;
+    }
+    .card-text{
+        position:absolute;
+        bottom: 20%;
+        left: 10%;
+        right: 10%;
+    }
+    .card-title{
+        position:absolute;
+        bottom: 30%;
+        left: 10%;
+        right: 10%;
+    }
+}
+
+@media (max-width: 1000px){
+    .card{
+        height: 400px;
+    }
+    .card-text{
+        position:absolute;
+        bottom: 22%;
+        left: 10%;
+        right: 10%;
+    }
+    .card-title{
+        position:absolute;
+        bottom: 32%;
+        left: 10%;
+        right: 10%;
+    }
+}
+
+@media (max-width: 767px){
+    .card{
+        height: 800px;
+    }
+    .card-text{
+        position:absolute;
+        bottom: 12%;
+        left: 10%;
+        right: 10%;
+    }
+    .card-title{
+        position:absolute;
+        bottom: 20%;
+        left: 10%;
+        right: 10%;
+    }
+}
+
+@media (max-width: 735px){
+    .card{
+        height: 800px;
+    }
+    .card-text{
+        position:absolute;
+        bottom: 13%;
+        left: 10%;
+        right: 10%;
+    }
+    .card-title{
+        position:absolute;
+        bottom: 20%;
+        left: 10%;
+        right: 10%;
+    }
+}
+
+@media (max-width: 700px){
+    .card{
+        height: 620px;
+    }
+    .card-text{
+        position:absolute;
+        bottom: 13%;
+        left: 10%;
+        right: 10%;
+    }
+    .card-title{
+        position:absolute;
+        bottom: 20%;
+        left: 10%;
+        right: 10%;
+    }
+}
+
+@media (max-width: 550px){
+    .card{
+        height: 530px;
+    }
+    .card-text{
+        position:absolute;
+        bottom: 14%;
+        left: 10%;
+        right: 10%;
+    }
+    .card-title{
+        position:absolute;
+        bottom: 22%;
+        left: 10%;
+        right: 10%;
+    }
+    
+}
+
+@media (max-width: 500px){
+    .card{
+        height: 560px;
+    }
+    .card-text{
+        position:absolute;
+        bottom: 14%;
+        left: 10%;
+        right: 10%;
+    }
+    .card-title{
+        position:absolute;
+        bottom: 22%;
+        left: 10%;
+        right: 10%;
+    }
+    
+}
+
+
+
+.btn-main-offer{
+    position: absolute;
+    width: auto;
+    bottom: 7%;
+    left: 10%;
+    right: 10%;
+    background-color: white;
+    font-weight: 900;
+    /*text-transform: uppercase;*/
+}
+
+.w-20{
+    background-color: #ededed;
+    border-radius: 20px;
+}
+
+#add-to-cart-btn{
+    float: left;
+}
+
+#clicked-product-price{
+    font-size: 25px;
+    padding-top: 0;
+}
+
+#add-to-cart-btn{
+    border-radius: 50px;
+    padding: 50px;
+    background-color: black;
+}
+
+.btn-main-offer{
+    border-radius: 100px;
+}
+
+.subscribe{
+    padding: 3%;
+
+}
+
+#testebtn{
+    padding: 5px 10px;
+}
+
+/*
+@media (max-width: 1000px){
+    .imgofertas{
+        height: 100%;
+    }
+    .card-img-top{
+        height: 100%;
+    }
+}*/
+
+.mb-4{
+    display: flex;
+    text-align: center;
+}
+
+.btn-dark{
+    border-radius: 50px;
+    background-color: black;
+}
+
+
+@media (max-width: 1000px){
+    .card-img-top{
+        display: relative;
+    }
+}
